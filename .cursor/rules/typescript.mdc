@@ -1,0 +1,9 @@
+---
+description: Typescript Best Practices
+globs: **/*.ts, **/*.tsx
+alwaysApply: false
+---
+
+# Full Documentation
+
+[.ai/rules/typescript.md](../../.ai/rules/typescript.md)

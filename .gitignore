@@ -3,6 +3,7 @@
 .claude/statsig
 .claude/plugins
 .claude/todos
+.claude/ide
 .envrc
 .venv
 logs

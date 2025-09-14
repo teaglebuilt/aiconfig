@@ -12,6 +12,8 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 CLAUDE_DIR="$SCRIPT_DIR/.claude"
 
+INSTALL_CLAUDE_CODE="npm install -g @anthropic-ai/claude-code"
+
 echo -e "${GREEN}Claude AI Workspace Installer${NC}"
 echo "=============================="
 
@@ -90,6 +92,22 @@ install_claude_code() {
     fi
 }
 
+# Function to install Claude Code Router
+install_claude_code_router() {
+    echo "Installing Claude Code Router..."
+    if npm list -g @musistudio/claude-code-router &> /dev/null; then
+        echo -e "${YELLOW}Claude Code Router already installed${NC}"
+    else
+        echo "Installing Claude Code Router globally..."
+        if npm install -g @musistudio/claude-code-router; then
+            echo -e "${GREEN}✓${NC} Claude Code Router installed successfully"
+        else
+            echo -e "${RED}Warning: Failed to install Claude Code Router${NC}"
+            echo "You may need to install it manually with: npm install -g @musistudio/claude-code-router"
+        fi
+    fi
+}
+
 # Check if .claude directory exists
 if [[ ! -d "$CLAUDE_DIR" ]]; then
     echo -e "${RED}Error: .claude directory not found at $CLAUDE_DIR${NC}"
@@ -115,7 +133,20 @@ fi
 ln -sf "$CLAUDE_DIR" "$HOME/.claude"
 echo -e "${GREEN}✓${NC} Created symlink: ~/.claude -> $CLAUDE_DIR"
 
-# 3. Add to PATH
+# 3. Create symlink to ~/.claude-code-router
+echo "Setting up ~/.claude-code-router symlink..."
+if [[ -L "$HOME/.claude-code-router" ]]; then
+    echo "Removing existing ~/.claude-code-router symlink..."
+    rm "$HOME/.claude-code-router"
+elif [[ -d "$HOME/.claude-code-router" ]]; then
+    echo -e "${YELLOW}Warning: ~/.claude-code-router directory already exists. Backing up to ~/.claude-code-router.backup${NC}"
+    mv "$HOME/.claude-code-router" "$HOME/.claude-code-router.backup"
+fi
+
+ln -sf "$SCRIPT_DIR/.claude-code-router" "$HOME/.claude-code-router"
+echo -e "${GREEN}✓${NC} Created symlink: ~/.claude-code-router -> $SCRIPT_DIR/.claude-code-router"
+
+# 4. Add to PATH
 SHELL_TYPE=$(detect_shell)
 echo "Detected shell: $SHELL_TYPE"
 
@@ -155,10 +186,11 @@ if [[ "$SHELL_TYPE" == "bash" ]] || [[ -f "$HOME/.bashrc" ]] || [[ -f "$HOME/.ba
     fi
 fi
 
-# 4. Install Claude code package
+# 5. Install Claude code packages
 install_claude_code
+install_claude_code_router
 
-# 5. Make any executable files in the workspace executable
+# 6. Make any executable files in the workspace executable
 echo "Setting up executable permissions..."
 find "$SCRIPT_DIR" -name "*.sh" -exec chmod +x {} \;
 if [[ -f "$SCRIPT_DIR/claude" ]]; then
@@ -178,7 +210,9 @@ else
     echo "1. Restart your terminal"
 fi
 echo "2. The .claude directory is now available at ~/.claude"
-echo "3. This directory is now in your PATH"
-echo "4. Claude Code is installed and available globally"
+echo "3. The .claude-code-router directory is now available at ~/.claude-code-router"
+echo "4. This directory is now in your PATH"
+echo "5. Claude Code is installed and available globally"
+echo "6. Claude Code Router is installed and available as 'ccr' command"
 echo ""
 echo -e "${YELLOW}Note: You may need to restart your terminal for PATH changes to take effect.${NC}" 

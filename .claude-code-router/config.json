@@ -1,0 +1,17 @@
+{
+  "OPENAI_API_KEY": "",
+  "ANTHROPIC_API_KEY": "",
+  "Providers": [
+    {
+      "name": "ollama",
+      "api_base_url": "https://ai.homelab.internal",
+      "models": [
+        "qwen2.5-coder:latest"
+      ]
+    }
+  ],
+  "Router": {
+    "background": "ollama,qwen2.5-coder:latest",
+    "think": "o3"
+  }
+}

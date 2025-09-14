@@ -4,3 +4,7 @@
 .claude/plugins
 .claude/todos
 .envrc
+.venv
+logs
+plugins
+.claude-code-router.pid

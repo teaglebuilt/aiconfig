@@ -1,0 +1,9 @@
+[project]
+name = "ai-workspace"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13.2"
+dependencies = [
+    "claude-code-sdk>=0.0.22",
+]

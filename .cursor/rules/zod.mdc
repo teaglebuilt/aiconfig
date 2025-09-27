@@ -1,0 +1,9 @@
+---
+description: zod rules
+globs: **/*.ts
+alwaysApply: false
+---
+
+# Full Documentation
+
+[.ai/rules/zod.md](../../.ai/rules/zod.md)

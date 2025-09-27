@@ -1,0 +1,27 @@
+{
+ "permissions": {
+    "allow": [
+
+    ],
+    "ask": [
+      "Write",
+      "Edit",
+      "MultiEdit"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/hooks/context_bundle_builder.py"
+          }
+        ]
+      }
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}

@@ -23,7 +23,7 @@ def get_session_id(input_data):
 
 def get_context_bundle_dir():
     """Get or create the context_bundles directory"""
-    context_dir = Path.cwd() / ".claude" / "context_bundles"
+    context_dir = Path.home() / ".claude" / "context_bundles"
     context_dir.mkdir(parents=True, exist_ok=True)
     return context_dir
 

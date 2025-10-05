@@ -9,3 +9,5 @@
 logs
 plugins
 .claude-code-router.pid
+.claude/context_bundles/*.json
+history.jsonl

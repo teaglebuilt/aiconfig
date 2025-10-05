@@ -13,6 +13,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 CLAUDE_DIR="$SCRIPT_DIR/.claude"
 
 INSTALL_CLAUDE_CODE="npm install -g @anthropic-ai/claude-code"
+INSTALL_CLAUDE_CODE_PROJECT_BUNDLER="npm install -g claude-code-project-bundler"
 
 echo -e "${GREEN}Claude AI Workspace Installer${NC}"
 echo "=============================="

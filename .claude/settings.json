@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/context_bundle_builder.py"
+            "command": "python ~/.claude/hooks/context_bundle_builder.py"
           }
         ]
       }

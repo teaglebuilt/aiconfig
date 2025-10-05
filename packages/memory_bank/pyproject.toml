@@ -1,0 +1,9 @@
+[project]
+name = "memory_bank"
+version = "0.1.0"
+dependencies = [
+    "duckdb>=1.4.0",
+    "fastapi>=0.118.0",
+    "lancedb>=0.25.1",
+    "pydantic>=2.11.9",
+]

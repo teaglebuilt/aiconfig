@@ -1,0 +1,10 @@
+package rss:search
+
+world rss-search {
+  export search
+}
+
+interface search {
+  rss-latest: func(limit: u32) -> string
+  rss-search: func(query: string, limit: u32) -> string
+}

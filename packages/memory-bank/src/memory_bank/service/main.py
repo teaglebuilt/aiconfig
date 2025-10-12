@@ -5,12 +5,20 @@ import hashlib
 import datetime as dt
 from typing import Any, Dict, List, Optional
 
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contracts import AddMemoryReq, AddMemoryResp, QueryReq, QueryResp
 from lancedb.rerankers import RRFReranker
-from vector_store import tbl, ensure_indexes, GM_TABLE
-from routes.migrate import migrate_router, ensure_extended_schema
+
+from memory_bank.service.contracts import (
+    AddMemoryReq,
+    AddMemoryResp,
+    QueryReq,
+    QueryResp,
+)
+from memory_bank.settings import get_settings
+from memory_bank.vector_store import tbl, ensure_indexes, GM_TABLE, ensure_extended_schema
+from memory_bank.service.guards import auth
+
 GM_API_KEY = os.getenv("GM_API_KEY")
 
 ensure_indexes()
@@ -23,13 +31,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(migrate_router, prefix="/v1/migrate")
 ensure_extended_schema()
-
-
-async def auth(x_key: Optional[str] = Header(None, alias="X-Global-Memory-Key")) -> None:
-    if GM_API_KEY and x_key != GM_API_KEY:
-        raise HTTPException(status_code=401, detail="Invalid X-Global-Memory-Key")
 
 
 def _canonicalize_for_hash(payload: AddMemoryReq) -> str:
@@ -104,8 +106,6 @@ def add_memory(body: AddMemoryReq, _: None = Depends(auth)):
         "created_at": now,
         "updated_at": now,
     }
-
-    # Upsert by hash
     (
         tbl.merge_insert("hash")
         .when_matched_update_all()
@@ -119,7 +119,6 @@ def add_memory(body: AddMemoryReq, _: None = Depends(auth)):
 @app.post("/v1/memory/query", response_model=QueryResp)
 def query_memory(body: QueryReq, _: None = Depends(auth)):
     where = _build_where(body.filters)
-
     # Hybrid search = semantic (vector) + BM25 FTS on content
     q = tbl.search(
         body.q,
@@ -168,6 +167,18 @@ def rebuild_indexes(_: None = Depends(auth)):
     return {"ok": True}
 
 
-if __name__ == "__main__":  # pragma: no cover
+def main() -> None:  # pragma: no cover
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5057)
+
+    settings = get_settings()
+    uvicorn.run(
+        "memory_bank.service.main:app",
+        host=settings.GM_API_HOST,
+        port=settings.GM_API_PORT,
+        reload=settings.GM_API_RELOAD,
+        reload_dirs=[settings.GM_API_RELOAD_DIR] if settings.GM_API_RELOAD else None,
+    )
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()

@@ -1,0 +1,24 @@
+[project]
+name = "memory-migrate"
+version = "0.1.0"
+dependencies = [
+    "duckdb",
+    "onnxruntime",
+    "pandas",
+    "numpy",
+    "pyarrow",
+    "fastapi",
+    "uvicorn",
+    "lancedb",
+    "rich",
+    "typer",
+    "datamodel-code-generator>=0.34.0",
+]
+
+[project.scripts]
+migrate = "memory_migrate.cli:app"
+serve = "memory_migrate.service:app"
+
+[build-system]
+requires = ["uv_build>=0.8.23,<0.9.0"]
+build-backend = "uv_build"

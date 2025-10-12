@@ -1,0 +1,17 @@
+[project]
+name = "memory_bank"
+version = "0.1.0"
+dependencies = [
+    "duckdb>=1.4.0",
+    "fastapi>=0.118.0",
+    "lancedb>=0.25.1",
+    "pydantic>=2.11.9",
+    "pydantic-settings>=2.6.1",
+]
+
+[project.scripts]
+memory-bank = "memory_bank.service.main:main"
+
+[build-system]
+requires = ["uv_build>=0.8.23,<0.9.0"]
+build-backend = "uv_build"

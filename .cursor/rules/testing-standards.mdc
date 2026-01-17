@@ -1,0 +1,165 @@
+---
+description: "Testing standards and best practices"
+globs: "**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx"
+alwaysApply: false
+---
+
+# Testing Standards
+
+> **Full Reference**: See `context/coding-standards/testing.md` for comprehensive guidelines
+
+## Core Philosophy
+
+- **Test behavior, not implementation** - Validate outcomes, not internals
+- **AAA Pattern** - Arrange, Act, Assert
+- **Fast tests** - Unit tests run in milliseconds
+- **Clear names** - "should [behavior] when [condition]"
+
+## Test Structure
+
+```typescript
+describe('UserService', () => {
+  it('should create user with valid data', async () => {
+    // Arrange - Set up test data
+    const userData = { name: 'John', email: 'john@example.com' }
+    const mockDb = createMockDatabase()
+    const service = new UserService(mockDb)
+
+    // Act - Execute code under test
+    const result = await service.createUser(userData)
+
+    // Assert - Verify outcome
+    expect(result.id).toBeDefined()
+    expect(result.name).toBe(userData.name)
+  })
+})
+```
+
+## Test Naming
+
+```typescript
+// Good - describes expected behavior
+it('should return 0 when cart is empty', () => {})
+it('should throw error when user ID is invalid', () => {})
+it('should render loading state when data is fetching', () => {})
+```
+
+## What to Test
+
+### Unit Tests
+- ✅ Business logic
+- ✅ Edge cases (null, undefined, empty, boundaries)
+- ✅ Error conditions
+- ✅ Pure functions
+- Target: 80% coverage
+
+### Integration Tests
+- ✅ Component interactions
+- ✅ Database operations
+- ✅ API integrations
+- ✅ Real dependencies
+
+### What NOT to Test
+- ❌ Third-party libraries
+- ❌ Framework code
+- ❌ Trivial getters/setters
+- ❌ Configuration files
+- ❌ Type definitions
+
+## Mocking
+
+### When to Mock
+- External services (APIs, databases)
+- Time-dependent code (Date.now(), timers)
+- Random values (Math.random(), UUIDs)
+- Expensive operations
+
+### Mock Strategy
+```typescript
+// Dependency injection (preferred)
+const mockDb = {
+  findOne: jest.fn().mockResolvedValue({ id: '123', name: 'John' })
+}
+const service = new UserService(mockDb)
+
+// Jest mock functions
+const mockFetch = jest.fn().mockResolvedValue({
+  ok: true,
+  json: async () => ({ data: 'test' })
+})
+```
+
+## React Testing
+
+```typescript
+import { render, screen, fireEvent } from '@testing-library/react'
+
+it('should submit form with valid credentials', async () => {
+  const mockOnSubmit = jest.fn()
+  render(<LoginForm onSubmit={mockOnSubmit} />)
+
+  // Find elements as users would
+  const emailInput = screen.getByLabelText(/email/i)
+  const submitButton = screen.getByRole('button', { name: /log in/i })
+
+  // Simulate user interaction
+  fireEvent.change(emailInput, { target: { value: 'user@example.com' } })
+  fireEvent.click(submitButton)
+
+  // Assert outcome
+  await waitFor(() => {
+    expect(mockOnSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({ email: 'user@example.com' })
+    )
+  })
+})
+```
+
+## Test Data Builders
+
+```typescript
+class UserBuilder {
+  private user: Partial<User> = {
+    id: '123',
+    name: 'Test User',
+    email: 'test@example.com'
+  }
+
+  withId(id: string) {
+    this.user.id = id
+    return this
+  }
+
+  withName(name: string) {
+    this.user.name = name
+    return this
+  }
+
+  build(): User {
+    return this.user as User
+  }
+}
+
+// Usage
+const user = new UserBuilder().withId('456').withName('Jane').build()
+```
+
+## Best Practices
+
+- ✅ One assertion per test (ideally)
+- ✅ Tests run independently
+- ✅ Setup/teardown properly
+- ✅ Descriptive test names
+- ✅ Test edge cases
+- ✅ Fast feedback loop
+
+## Common Pitfalls
+
+- ❌ Testing implementation details
+- ❌ Over-mocking (makes tests meaningless)
+- ❌ Flaky tests (timing issues)
+- ❌ Slow tests
+- ❌ Unclear failures
+- ❌ Too many assertions
+
+When writing tests, focus on behavior and user perspective. Refer to `context/coding-standards/testing.md` for detailed examples and patterns.

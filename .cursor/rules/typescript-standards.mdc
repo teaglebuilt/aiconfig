@@ -1,0 +1,81 @@
+---
+description: "TypeScript coding standards and best practices"
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# TypeScript Standards
+
+> **Full Reference**: See `context/coding-standards/typescript.md` for comprehensive guidelines
+
+## Quick Reference
+
+### Type Safety
+- Use `strict: true` in tsconfig
+- Avoid `any` - use `unknown` if type is truly unknown
+- Prefer type inference over explicit types when obvious
+- Use discriminated unions for complex state
+
+### Naming Conventions
+- Variables/Functions: `camelCase`
+- Types/Interfaces: `PascalCase`
+- Constants: `UPPER_SNAKE_CASE` or `camelCase` for config objects
+- Files: `kebab-case.ts`, `PascalCase.tsx` for React components
+
+### Type Definitions
+- Prefer interfaces for object shapes
+- Use type for unions, intersections, utilities
+- Use generic constraints: `<T extends { id: string }>`
+- Leverage utility types: `Partial`, `Pick`, `Omit`, `Record`
+
+### Error Handling
+- Result types for expected errors: `Result<T, E>`
+- Exceptions for unexpected errors
+- Always handle async errors with try/catch
+
+### React + TypeScript
+- Functional components with explicit prop types
+- Use `as const` for type literals
+- Custom hooks return `as const` tuples
+- Avoid `React.FC` (use plain functions)
+
+### Common Patterns
+
+```typescript
+// Discriminated unions
+type Result<T, E = Error> =
+  | { success: true; data: T }
+  | { success: false; error: E }
+
+// Generic constraints
+function process<T extends { id: string }>(item: T): void {
+  console.log(item.id)
+}
+
+// Async with error handling
+async function fetchData(): Promise<Result<Data>> {
+  try {
+    const response = await fetch('/api/data')
+    const data = await response.json()
+    return { success: true, data }
+  } catch (error) {
+    return { success: false, error: error as Error }
+  }
+}
+```
+
+### Don'ts
+- ❌ `any` without good reason
+- ❌ `@ts-ignore` (use `@ts-expect-error` if needed)
+- ❌ `Function` type (use specific signatures)
+- ❌ `Object` or `{}` (use `Record<string, unknown>`)
+- ❌ `var` (use `const` or `let`)
+
+### Do's
+- ✅ `const` by default
+- ✅ Discriminated unions for complex state
+- ✅ Branded types for domain primitives
+- ✅ Path aliases (`@/`) to avoid relative import hell
+- ✅ Document complex types with JSDoc
+
+When working with TypeScript files, apply these standards consistently. Refer to the full documentation in `context/coding-standards/typescript.md` for detailed explanations and more examples.

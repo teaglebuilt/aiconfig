@@ -1,0 +1,84 @@
+---
+description: "Project memory and persistent context access"
+alwaysApply: true
+---
+
+# Memory Context
+
+This project uses a shared memory system for persistent context across sessions.
+
+## Memory Location
+
+Memory files are stored in the aiconfig repository:
+
+```
+~/aiconfig/memory/
+├── global/preferences.json      # Cross-project coding preferences
+├── projects/{name}/             # Per-project memory
+│   ├── context.json             # Project context & architecture
+│   ├── sessions.json            # Session history
+│   └── decisions.json           # Architectural decisions
+└── vectors/                     # LanceDB semantic search (if enabled)
+```
+
+## Session Start
+
+At the beginning of a coding session, check for relevant memory:
+
+1. **Global preferences**: `~/aiconfig/memory/global/preferences.json`
+   - Coding patterns, tool preferences, learned behaviors
+
+2. **Project context**: `~/aiconfig/memory/projects/{project}/context.json`
+   - Tech stack, architecture, current focus, known issues
+
+3. **Recent sessions**: `~/aiconfig/memory/projects/{project}/sessions.json`
+   - What was done recently, follow-up tasks, decisions made
+
+## During Session
+
+When making significant decisions or completing tasks:
+
+- Note architectural decisions for `decisions.json`
+- Track files modified for session summary
+- Remember patterns that worked well
+
+## Session End
+
+Before ending a session, consider updating:
+
+1. **Session log**: Add summary to `sessions.json`
+2. **Project context**: Update current focus, active branches
+3. **Decisions**: Document any architectural choices made
+
+## Memory Schema
+
+### Project Context
+```json
+{
+  "project": "project-name",
+  "tech_stack": ["React", "TypeScript"],
+  "architecture": { "pattern": "Clean Architecture" },
+  "current_focus": "Implementing feature X",
+  "known_issues": [{ "issue": "...", "status": "investigating" }]
+}
+```
+
+### Session Log
+```json
+{
+  "sessions": [{
+    "date": "2025-01-18",
+    "client": "cursor",
+    "summary": "Implemented user auth",
+    "files_modified": ["src/auth.ts"],
+    "follow_up": ["Add tests"]
+  }]
+}
+```
+
+## Cross-Client Sync
+
+This memory is shared with Claude Code. Both tools read/write to the same files, ensuring:
+- Consistent context across tools
+- No repeated explanations
+- Continuous progress tracking

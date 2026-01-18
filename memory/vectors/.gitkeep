@@ -1,0 +1,3 @@
+# LanceDB vector storage directory
+# The actual lancedb/ folder will be created on first use
+# Add lancedb/ to .gitignore if you don't want to track embeddings

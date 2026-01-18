@@ -1,0 +1,21 @@
+{
+  "$schema": "../memory/schemas/project-context.schema.json",
+  "project": "{{PROJECT_NAME}}",
+  "created": "{{CREATED_DATE}}",
+  "description": "",
+  "tech_stack": [],
+  "architecture": {
+    "pattern": "",
+    "key_modules": [],
+    "data_flow": ""
+  },
+  "key_decisions": [],
+  "current_focus": "",
+  "active_branches": [],
+  "known_issues": [],
+  "conventions": {
+    "file_naming": "",
+    "directory_structure": "",
+    "import_style": ""
+  }
+}

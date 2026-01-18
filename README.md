@@ -1,10 +1,8 @@
-# AIConfig - Shared Context for AI Coding Assistants
-
-> Your portable "dotfiles" for vibecoding across Claude Code, Cursor, and other AI assistants.
+# AIConfig
 
 ## Overview
 
-AIConfig is a **shared context system** that provides consistent coding preferences, workflows, and knowledge across different AI coding tools. Think of it as "dotfiles for AI assistants" - configure once, use everywhere.
+Centralized configuration and management for AI vibe coding clients.
 
 1. [Architecture](./docs/architecture.md)
 

@@ -1,0 +1,16 @@
+{
+  "$schema": "../memory/schemas/session-log.schema.json",
+  "sessions": [
+    {
+      "id": "session-{{ID}}",
+      "date": "{{DATE}}",
+      "client": "claude-code|cursor",
+      "project": "{{PROJECT_NAME}}",
+      "summary": "",
+      "files_modified": [],
+      "decisions_made": [],
+      "follow_up": [],
+      "tags": []
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+---
+description: "Git conventions and workflow preferences"
+alwaysApply: false
+---
+
+# Git Workflow
+
+> **Full Reference**: See `context/workflows/git-conventions.md` for comprehensive guidelines
+
+## Commit Messages (Conventional Commits)
+
+### Format
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Types
+- `feat` - New feature
+- `fix` - Bug fix
+- `refactor` - Code refactoring (no functional change)
+- `test` - Adding/updating tests
+- `docs` - Documentation changes
+- `chore` - Maintenance, dependencies, build config
+- `perf` - Performance improvements
+- `style` - Code style changes (formatting)
+
+### Examples
+```
+feat(auth): add JWT token refresh mechanism
+
+Implement automatic token refresh when access token expires.
+Tokens are refreshed 5 minutes before expiration.
+
+Closes #123
+```
+
+```
+fix(api): handle null response in user endpoint
+
+Previously crashed when user not found. Now returns 404.
+
+Fixes #456
+```
+
+### Guidelines
+- Subject: 50 chars max, imperative mood ("add" not "added")
+- Body: Wrap at 72 chars, explain what and why
+- Footer: Reference issues (Closes #123, Fixes #456)
+- No period at end of subject line
+
+## Branch Naming
+
+### Format
+```
+<type>/<short-description>
+```
+
+### Examples
+```
+feature/user-authentication
+fix/login-validation-error
+refactor/api-client-structure
+docs/update-readme
+test/add-user-service-tests
+chore/update-dependencies
+```
+
+## Workflow
+
+### Feature Development
+```bash
+# Create feature branch from main
+git checkout main
+git pull origin main
+git checkout -b feature/user-profile
+
+# Make changes and commit
+git add src/components/UserProfile.tsx
+git commit -m "feat(profile): add user profile component"
+
+# Keep branch updated
+git fetch origin main
+git rebase origin/main
+
+# Push and create PR
+git push -u origin feature/user-profile
+```
+
+### Committing Best Practices
+
+- ✅ Commit frequently with logical chunks
+- ✅ Each commit should be atomic (one logical change)
+- ✅ Review changes before committing (`git diff --staged`)
+- ✅ Write descriptive commit messages
+- ✅ Test before committing
+- ✅ Keep commits focused
+
+### What to Commit
+
+```bash
+# Stage specific files (avoid git add .)
+git add src/services/auth.service.ts
+git add src/api/auth.routes.ts
+
+# Review what's staged
+git diff --staged
+
+# Commit with clear message
+git commit -m "feat(auth): add user registration service"
+```
+
+## Rebasing vs Merging
+
+### Use Rebase For
+- Feature branches (clean, linear history)
+- Updating with main: `git rebase origin/main`
+- Local commits before pushing
+
+```bash
+git fetch origin main
+git rebase origin/main
+# Resolve conflicts if any
+git push --force-with-lease origin feature/user-profile
+```
+
+### Use Merge For
+- Integrating PRs (preserves feature branch history)
+- Main/production branches (never rebase public branches)
+
+## Pull Request Best Practices
+
+### PR Title
+Follow commit format:
+```
+feat(auth): Add social login support
+fix(api): Handle edge case in pagination
+```
+
+### PR Size
+- Small PRs (<400 lines) are easier to review
+- Break large changes into multiple PRs when possible
+
+### Before Creating PR
+- [ ] All tests pass
+- [ ] No linting errors
+- [ ] Code formatted
+- [ ] Self-reviewed changes
+- [ ] Unnecessary code/comments removed
+- [ ] Commit messages are clear
+
+## Don'ts
+
+- ❌ Don't commit directly to main
+- ❌ Don't force push to shared branches
+- ❌ Don't commit secrets, API keys, credentials
+- ❌ Don't commit large binary files
+- ❌ Don't create commits like "fix", "wip", "temp"
+- ❌ Don't rebase public/shared branches
+- ❌ Don't mix unrelated changes in one commit
+
+## Do's
+
+- ✅ Write descriptive commit messages
+- ✅ Commit frequently with logical chunks
+- ✅ Pull before you push
+- ✅ Review your own PRs first
+- ✅ Keep commits atomic
+- ✅ Test before committing
+- ✅ Use .gitignore properly
+
+When working with git, follow these conventions for consistency. For detailed git workflows and advanced scenarios, refer to `context/workflows/git-conventions.md`.

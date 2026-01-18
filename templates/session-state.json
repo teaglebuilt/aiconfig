@@ -1,0 +1,66 @@
+{
+  "$schema": "./session-state.schema.json",
+  "feature": "feature-name",
+  "status": "in_progress",
+  "currentPhase": "architect",
+  "phases": {
+    "architect": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "artifacts": [],
+      "handoff": null
+    },
+    "plan": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "artifacts": [],
+      "handoff": null
+    },
+    "implement": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "artifacts": [],
+      "tasks": {
+        "total": 0,
+        "completed": 0,
+        "inProgress": null,
+        "taskFiles": []
+      }
+    },
+    "test": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "artifacts": [],
+      "testResults": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    "review": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "artifacts": [],
+      "issues": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0,
+        "fixed": 0
+      }
+    }
+  },
+  "metadata": {
+    "createdAt": "ISO_TIMESTAMP",
+    "updatedAt": "ISO_TIMESTAMP",
+    "version": "1.0.0"
+  },
+  "commits": [],
+  "blockers": [],
+  "notes": []
+}

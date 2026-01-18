@@ -1,0 +1,18 @@
+{
+  "$schema": "../memory/schemas/decisions.schema.json",
+  "decisions": [
+    {
+      "id": "decision-{{ID}}",
+      "date": "{{DATE}}",
+      "title": "",
+      "context": "",
+      "decision": "",
+      "rationale": "",
+      "alternatives_considered": [],
+      "consequences": [],
+      "status": "accepted|superseded|deprecated",
+      "related_files": [],
+      "tags": []
+    }
+  ]
+}

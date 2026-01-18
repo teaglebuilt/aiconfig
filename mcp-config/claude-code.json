@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "MCP server configuration for Claude Code - copy to ~/.claude/",
+  "mcpServers": {
+    "basic-memory": {
+      "command": "uvx",
+      "args": ["basic-memory", "mcp"],
+      "description": "Persistent memory with markdown notes and knowledge graph"
+    },
+    "lancedb": {
+      "command": "uvx",
+      "args": ["lancedb-mcp"],
+      "env": {
+        "LANCEDB_URI": "${AICONFIG_PATH:-$HOME/aiconfig}/memory/vectors/lancedb",
+        "LANCEDB_TABLE": "aiconfig_embeddings"
+      },
+      "description": "Embedded vector database for semantic search - no server required"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-filesystem"],
+      "env": {
+        "ALLOWED_PATHS": "${AICONFIG_PATH:-$HOME/aiconfig}"
+      },
+      "description": "Read/write access to aiconfig memory files"
+    }
+  },
+  "notes": {
+    "basic-memory": "Stores notes in ~/Documents/basic-memory by default. Use for persistent context across sessions.",
+    "lancedb": "Embedded vector DB stored at memory/vectors/lancedb. No server required. Install: pip install lancedb-mcp",
+    "installation": {
+      "basic-memory": "pip install basic-memory",
+      "lancedb": "pip install lancedb lancedb-mcp"
+    }
+  }
+}

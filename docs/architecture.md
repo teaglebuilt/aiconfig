@@ -1,6 +1,6 @@
 
 - [Configuration](#configuration)
-- [MCP Integration](#mcp-integration)
+  - [MCP Integration](#mcp-configuration)
 - [Memory](#memory)
   - [Global Memory](#global-memory)
   - [Project Memory](#project-memory)
@@ -12,7 +12,7 @@
   
 ### Configuration
 
-### MCP Integration
+#### MCP Configuration
 
 The memory system integrates with AI clients via MCP servers:
 

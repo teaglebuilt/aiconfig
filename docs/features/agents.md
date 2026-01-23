@@ -2,6 +2,9 @@
 
 Agents are specialized personas with domain expertise and predefined tools.
 
+[Cursor Agents](https://cursor.com/docs/context/subagents)
+[Claude Code Agents](https://code.claude.com/docs/en/sub-agents)
+
 #### Available Agents
 
 | Agent | Description | Tools |

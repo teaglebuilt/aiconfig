@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aiconfig.dev/schemas/decisions.schema.json",
+  "title": "AIConfig Architectural Decisions",
+  "description": "Architectural Decision Records (ADRs) for a project",
+  "type": "object",
+  "required": ["project", "decisions"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Project name this decisions file belongs to"
+    },
+    "decisions": {
+      "type": "array",
+      "description": "Array of architectural decision records",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "title", "decision", "status"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^ADR-\\d{3,}$",
+            "description": "Unique ADR ID (ADR-001, ADR-002, etc.)"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date the decision was made"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Short title describing the decision"
+          },
+          "context": {
+            "type": "string",
+            "description": "Background and context for why this decision was needed"
+          },
+          "decision": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The decision that was made"
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Why this decision was chosen"
+          },
+          "alternatives_considered": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Other options that were considered"
+          },
+          "consequences": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Known consequences of this decision"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["proposed", "accepted", "deprecated", "superseded"],
+            "description": "Current status of the decision"
+          },
+          "superseded_by": {
+            "type": "string",
+            "pattern": "^ADR-\\d{3,}$",
+            "description": "If superseded, the ADR that replaces this one"
+          },
+          "related_sessions": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Session IDs where this decision was discussed"
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Tags for categorization"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

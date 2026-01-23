@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aiconfig.dev/schemas/context.schema.json",
+  "title": "AIConfig Project Context",
+  "description": "Project-specific context including tech stack, architecture, and current state",
+  "type": "object",
+  "required": ["project", "created"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Project name/identifier"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this project memory was initialized"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief project description"
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "description": "Git remote URL"
+    },
+    "tech_stack": {
+      "type": "object",
+      "description": "Technologies used in the project",
+      "properties": {
+        "languages": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "frameworks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "databases": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "infrastructure": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "description": "Architectural overview",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "enum": ["monolith", "microservices", "serverless", "modular-monolith", "hybrid"],
+          "description": "Primary architecture pattern"
+        },
+        "key_directories": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Important directories and their purposes"
+        }
+      },
+      "additionalProperties": true
+    },
+    "current_focus": {
+      "type": "string",
+      "description": "What is currently being worked on"
+    },
+    "active_branches": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Currently active git branches"
+    },
+    "known_issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "issue": { "type": "string" },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"]
+          },
+          "added": { "type": "string", "format": "date" }
+        },
+        "required": ["issue"]
+      },
+      "description": "Known bugs or issues"
+    },
+    "team_conventions": {
+      "type": "object",
+      "description": "Team coding conventions",
+      "properties": {
+        "commit_format": {
+          "type": "string",
+          "description": "Commit message format"
+        },
+        "branch_naming": {
+          "type": "string",
+          "description": "Branch naming convention"
+        },
+        "pr_template": {
+          "type": "boolean",
+          "description": "Whether PR templates are used"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

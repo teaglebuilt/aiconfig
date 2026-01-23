@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aiconfig.dev/schemas/sessions.schema.json",
+  "title": "AIConfig Session History",
+  "description": "History of AI coding sessions for a project",
+  "type": "object",
+  "required": ["project", "sessions"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Project name this sessions file belongs to"
+    },
+    "sessions": {
+      "type": "array",
+      "description": "Array of session logs",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "summary"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^session-\\d{8}-\\d{6}$",
+            "description": "Unique session ID (session-YYYYMMDD-HHMMSS)"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Session date (YYYY-MM-DD)"
+          },
+          "client": {
+            "type": "string",
+            "enum": ["claude-code", "cursor", "other"],
+            "description": "AI client used for the session"
+          },
+          "duration_estimate": {
+            "type": "string",
+            "description": "Estimated session duration"
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Brief summary of what was accomplished"
+          },
+          "files_modified": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Files created or modified"
+          },
+          "decisions_made": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["decision"],
+              "properties": {
+                "decision": {
+                  "type": "string",
+                  "description": "The decision made"
+                },
+                "rationale": {
+                  "type": "string",
+                  "description": "Why this decision was made"
+                }
+              }
+            },
+            "description": "Technical decisions made during the session"
+          },
+          "follow_up": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Tasks to follow up on"
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Tags for categorization and search"
+          },
+          "context_for_next_session": {
+            "type": "string",
+            "description": "Context to provide continuity for the next session"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -46,7 +46,14 @@ Or infer from:
 
 ## Step 3: Session Log Format
 
-Add entry to `sessions.json`:
+Add entry to `sessions.json` using atomic writes to prevent corruption:
+
+```bash
+# Use atomic write for safe file updates
+~/aiconfig/scripts/atomic-write.sh ~/aiconfig/memory/projects/{project}/sessions.json --backup
+```
+
+Session entry format:
 
 ```json
 {

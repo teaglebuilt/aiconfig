@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aiconfig.dev/schemas/preferences.schema.json",
+  "title": "AIConfig Global Preferences",
+  "description": "Cross-project user preferences and learned patterns",
+  "type": "object",
+  "required": ["version", "coding_preferences"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Schema version (semver major.minor)"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of last update"
+    },
+    "coding_preferences": {
+      "type": "object",
+      "description": "User's coding style preferences",
+      "properties": {
+        "languages": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Primary languages used"
+            },
+            "secondary": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Secondary/occasional languages"
+            }
+          }
+        },
+        "patterns": {
+          "type": "object",
+          "properties": {
+            "preferred": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Preferred coding patterns"
+            },
+            "avoid": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Patterns to avoid"
+            }
+          }
+        },
+        "testing": {
+          "type": "object",
+          "properties": {
+            "approach": {
+              "type": "string",
+              "description": "Testing philosophy"
+            },
+            "coverage_target": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Target test coverage percentage"
+            },
+            "framework_preferences": {
+              "type": "object",
+              "additionalProperties": { "type": "string" },
+              "description": "Preferred test frameworks by language/context"
+            }
+          }
+        }
+      }
+    },
+    "tool_preferences": {
+      "type": "object",
+      "description": "Preferred development tools",
+      "properties": {
+        "formatter": { "type": "string" },
+        "linter": { "type": "string" },
+        "package_manager": { "type": "string" }
+      },
+      "additionalProperties": { "type": "string" }
+    },
+    "learned_preferences": {
+      "type": "array",
+      "description": "AI-learned preferences from sessions",
+      "items": {
+        "type": "object",
+        "required": ["context", "preference"],
+        "properties": {
+          "context": {
+            "type": "string",
+            "description": "When this preference applies"
+          },
+          "preference": {
+            "type": "string",
+            "description": "The learned preference"
+          },
+          "learned_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source_session": {
+            "type": "string",
+            "description": "Session ID where this was learned"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

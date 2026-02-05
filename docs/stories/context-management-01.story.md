@@ -31,13 +31,13 @@ Address gaps between documented architecture and actual implementation in the AI
 - [x] TASK-002: Implement atomic file writes with temp files and rename to prevent corruption
 
 ### Phase 2: Synchronization & Conflict Handling (High Priority)
-- [ ] TASK-003: Implement file locking mechanism for concurrent client access
-- [ ] TASK-004: Add version vectors for conflict detection between Claude Code and Cursor
-- [ ] TASK-005: Create merge strategies for common conflict scenarios (append for sessions, manual for decisions)
+- [x] TASK-003: Implement file locking mechanism for concurrent client access
+- [x] TASK-004: Add version vectors for conflict detection between Claude Code and Cursor
+- [x] TASK-005: Create merge strategies for common conflict scenarios (append for sessions, manual for decisions)
 
 ### Phase 3: Cross-Client Parity (Medium Priority)
-- [ ] TASK-006: Populate `.cursor/rules/` with actual rule files matching Claude Code capabilities
-- [ ] TASK-007: Create hook abstraction layer to normalize event differences between clients
+- [x] TASK-006: Populate `.cursor/rules/` with actual rule files matching Claude Code capabilities
+- [x] TASK-007: Create hook abstraction layer to normalize event differences between clients (Cursor has native support)
 - [ ] TASK-008: Unify environment variable handling (`AICONFIG_PATH`) across all MCP configs
 
 ### Phase 4: Performance & Retrieval (Medium Priority)
@@ -87,12 +87,12 @@ TASK-011 (requires Tracks A and C)
 ## Acceptance Criteria
 
 ### Must Have
-- [ ] Memory files have schema validation
-- [ ] Concurrent client access doesn't corrupt data
-- [ ] Atomic writes prevent partial file corruption
+- [x] Memory files have schema validation
+- [x] Concurrent client access doesn't corrupt data
+- [x] Atomic writes prevent partial file corruption
 
 ### Should Have
-- [ ] Cursor rules parity with Claude Code
+- [x] Cursor rules parity with Claude Code
 - [ ] LanceDB semantic search working in `/recall`
 - [ ] Unified environment variable handling
 

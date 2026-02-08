@@ -1,0 +1,70 @@
+---
+description: "Data integrity utilities for safe memory file operations"
+alwaysApply: false
+globs: ["**/memory/**/*.json"]
+---
+
+# Data Integrity Utilities
+
+When working with memory files (`~/aiconfig/memory/`), use these utilities to ensure data integrity.
+
+## Atomic Writes
+
+Always use atomic writes for memory files to prevent corruption:
+
+```bash
+# Write with locking (recommended for shared files)
+echo '{"data": "..."}' | ~/aiconfig/scripts/atomic-write.sh /path/to/file.json --lock --client cursor
+
+# Write with backup
+echo '{"data": "..."}' | ~/aiconfig/scripts/atomic-write.sh /path/to/file.json --backup
+```
+
+## File Locking
+
+For concurrent access between Claude Code and Cursor:
+
+```bash
+# Acquire lock before complex operations
+~/aiconfig/scripts/file-lock.sh acquire /path/to/file.json --client cursor --timeout 30
+
+# Release when done
+~/aiconfig/scripts/file-lock.sh release /path/to/file.json
+
+# Check lock status
+~/aiconfig/scripts/file-lock.sh status /path/to/file.json
+```
+
+## Version Vectors
+
+Track modifications for conflict detection:
+
+```bash
+# Check current version
+~/aiconfig/scripts/version-vector.sh read /path/to/file.json
+
+# After modifying, increment version
+~/aiconfig/scripts/version-vector.sh increment /path/to/file.json --client cursor
+```
+
+## Merge Conflicts
+
+When conflicts are detected, use merge strategies:
+
+```bash
+# Sessions: append (safe)
+~/aiconfig/scripts/merge-memory.sh sessions ours.json --theirs theirs.json
+
+# Decisions: manual review
+~/aiconfig/scripts/merge-memory.sh decisions ours.json --theirs theirs.json
+
+# Context: smart merge
+~/aiconfig/scripts/merge-memory.sh context ours.json --theirs theirs.json
+```
+
+## Best Practices
+
+1. **Always use `--lock`** when writing to shared memory files
+2. **Increment version** after successful writes
+3. **Check for conflicts** before overwriting if version changed
+4. **Use appropriate merge strategy** based on file type

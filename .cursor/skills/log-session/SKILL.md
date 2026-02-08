@@ -55,7 +55,19 @@ Review the conversation and identify:
 
 ### 3. Append to sessions.json
 
-Read `~/aiconfig/memory/projects/{project}/sessions.json`, append new session, write back.
+Use atomic writes with locking for safe concurrent access:
+
+```bash
+# Read current sessions, append new entry, write back safely
+echo '{...}' | ~/aiconfig/scripts/atomic-write.sh \
+  ~/aiconfig/memory/projects/{project}/sessions.json \
+  --lock --backup --client cursor
+
+# Increment version after successful write
+~/aiconfig/scripts/version-vector.sh increment \
+  ~/aiconfig/memory/projects/{project}/sessions.json \
+  --client cursor
+```
 
 ### 4. Record Architectural Decisions (if any)
 

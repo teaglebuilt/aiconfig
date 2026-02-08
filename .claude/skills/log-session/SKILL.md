@@ -46,11 +46,18 @@ Or infer from:
 
 ## Step 3: Session Log Format
 
-Add entry to `sessions.json` using atomic writes to prevent corruption:
+Add entry to `sessions.json` using atomic writes with locking:
 
 ```bash
-# Use atomic write for safe file updates
-~/aiconfig/scripts/atomic-write.sh ~/aiconfig/memory/projects/{project}/sessions.json --backup
+# Use atomic write with locking for safe concurrent access
+echo '{...}' | ~/aiconfig/scripts/atomic-write.sh \
+  ~/aiconfig/memory/projects/{project}/sessions.json \
+  --lock --backup --client claude-code
+
+# Increment version after successful write
+~/aiconfig/scripts/version-vector.sh increment \
+  ~/aiconfig/memory/projects/{project}/sessions.json \
+  --client claude-code
 ```
 
 Session entry format:

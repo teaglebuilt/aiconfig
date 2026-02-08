@@ -44,11 +44,13 @@ mkdir -p ~/aiconfig/memory/projects/{project-name}
 
 ## Step 3: Initialize context.json
 
-Use atomic writes to ensure file integrity:
+Use atomic writes with locking to ensure file integrity:
 
 ```bash
-# Atomic write with JSON validation
-~/aiconfig/scripts/atomic-write.sh ~/aiconfig/memory/projects/{project-name}/context.json
+# Atomic write with locking and client identification
+echo '{...}' | ~/aiconfig/scripts/atomic-write.sh \
+  ~/aiconfig/memory/projects/{project-name}/context.json \
+  --lock --client claude-code
 ```
 
 Content:

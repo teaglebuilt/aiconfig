@@ -4,12 +4,6 @@
 
 AIConfig is a portable, centralized configuration system that enables seamless context sharing across AI coding clients. It provides a single source of truth for preferences, memory, skills, and workflows.
 
-### Features
-
-1. [Context Management](#context---how-we-work)
-2. [Memory Management](#memory-system)
-3. [Cross Client Integration](#client-integration)
-
 ```
 ┌───────────────────────────────────────────────────────────────────────┐
 │                            AIConfig                                   │

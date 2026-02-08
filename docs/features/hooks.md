@@ -1,6 +1,10 @@
 # Hooks
 
-On install of `aiconfig` the hooks like everything else, are setup and configured to work between cursor and claude code.
+On install of `aiconfig` the hooks like everything else, are setup and configured to work between cursor and claude code. 
+
+https://cursor.com/docs/agent/third-party-hooks
+
+Claude Code hooks use a similar but slightly different format. Cursor automatically maps Claude hook names to their Cursor equivalents.
 
 ## Hook Events
 

@@ -1,5 +1,6 @@
 services:
   claude-code:
     build: .
+    working_dir: /workspace/aiconfig
     volumes:
       - ${PWD}:/workspace/aiconfig

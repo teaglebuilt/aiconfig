@@ -1,0 +1,11 @@
+{
+ "name": "aiconfig",
+ "version": "0.0.1",
+ "description": "AIConfig - Shared AI coding configuration",
+ "main": "index.js",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "author": "Claude",
+ "license": "ISC"
+}

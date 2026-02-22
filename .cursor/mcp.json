@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "basic-memory": {
+      "command": "uvx",
+      "args": ["basic-memory", "mcp"]
+    },
+    "lancedb": {
+      "command": "uvx",
+      "args": ["lancedb-mcp"],
+      "env": {
+        "LANCEDB_URI": "~/aiconfig/memory/vectors/lancedb",
+        "LANCEDB_TABLE": "aiconfig_embeddings"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-filesystem", "~/aiconfig"]
+    }
+  }
+}

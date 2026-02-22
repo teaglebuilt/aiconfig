@@ -1,0 +1,5 @@
+services:
+  claude-code:
+    build: .
+    volumes:
+      - ${PWD}:/workspace/aiconfig

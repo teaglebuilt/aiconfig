@@ -2,7 +2,7 @@
 
 > Use this template when creating new domain references. Every section is required to maintain consistency across domains.
 >
-> **File placement:** Place this file in the appropriate domain folder under `domains/`. If no folder exists for this domain group, create one. If a subject belongs alongside an existing domain (e.g., a new K8s-related tool), add it to that folder. Update `SKILL.md` routing table after adding.
+> **File placement:** Place this file in the appropriate domain folder under `context/knowledge/domains/`. If no folder exists for this domain group, create one. If a subject belongs alongside an existing domain (e.g., a new K8s-related tool), add it to that folder. Update any skill `SKILL.md` routing tables that reference domains after adding.
 
 ---
 

@@ -107,11 +107,11 @@ When designing from scratch or planning a migration:
 
 ### Domain References
 
-Domain references provide technology-specific architectural knowledge. They live in grouped folders under `domains/`. Load every relevant domain file when the task involves that technology — multiple domains often apply simultaneously.
+Domain references provide technology-specific architectural knowledge. They live in grouped folders under `context/knowledge/domains/` (relative to the aiconfig root). Load every relevant domain file when the task involves that technology — multiple domains often apply simultaneously.
 
-**To add a new domain reference:** Copy `domains/_TEMPLATE.md` and follow the structure.
+**To add a new domain reference:** Copy `context/knowledge/domains/_TEMPLATE.md` and follow the structure.
 
-#### `domains/kubernetes/` — Container Orchestration & Deployment
+#### `context/knowledge/domains/kubernetes/` — Container Orchestration & Deployment
 
 | File | When to Load |
 |------|-------------|
@@ -120,33 +120,33 @@ Domain references provide technology-specific architectural knowledge. They live
 | `multicluster.md` | Multi-cluster management: fleet patterns, cross-cluster networking, state synchronization, failover |
 | `talos.md` | Talos Linux as K8s OS: immutable infrastructure, API-driven node management, security posture |
 
-#### `domains/frontend/` — Frontend Architecture
+#### `context/knowledge/domains/frontend/` — Frontend Architecture
 
 | File | When to Load |
 |------|-------------|
 | `microfrontends.md` | MFE composition, routing, shared dependencies, inter-MFE communication, deployment |
 | `turborepo.md` | Monorepo architecture: package boundaries, dependency direction, caching, task pipelines |
 
-#### `domains/ai/` — AI Systems Architecture
+#### `context/knowledge/domains/ai/` — AI Systems Architecture
 
 | File | When to Load |
 |------|-------------|
 | `mcp.md` | Model Context Protocol: server topology, tool design, transport, agent-to-MCP composition |
 | `claude-code.md` | configuring, extending, automating, and enhancing claude code and claude code usage.  |
 
-#### `domains/infrastructure/` — Infrastructure & Tooling
+#### `context/knowledge/domains/devops/` — Infrastructure & Tooling
 
 | File | When to Load |
 |------|-------------|
 | `nix.md` | Reproducible builds and environments: adoption scope, flakes, caching, container images |
 
-#### `domains/data-platform/` — Data Architecture
+#### `context/knowledge/domains/data/` — Data Architecture
 
 | File | When to Load |
 |------|-------------|
 | `data-platform.md` | Data architecture paradigm, ingestion, storage, transformation, serving, governance |
 
-#### `domains/backend/` — Backend Architecture
+#### `context/knowledge/domains/backend/` — Backend Architecture
 
 | File | When to Load |
 |------|-------------|
@@ -156,8 +156,8 @@ Domain references provide technology-specific architectural knowledge. They live
 
 ## Domain Loading Rules
 
-1. **Always check domains/** when the task mentions a specific technology
+1. **Always check `context/knowledge/domains/`** when the task mentions a specific technology
 2. **Load multiple domain files** when technologies intersect (e.g., ArgoCD + Kubernetes + Nix for a GitOps deployment decision)
 3. **Check the "Combines With" section** at the bottom of each domain file for cross-domain considerations
 4. **Universal resources still apply** — domain references supplement the universal frameworks, they don't replace them
-5. **If a domain file doesn't exist yet**, use `_TEMPLATE.md` to reason about the domain's architectural decisions anyway
+5. **If a domain file doesn't exist yet**, use `context/knowledge/domains/_TEMPLATE.md` to reason about the domain's architectural decisions anyway

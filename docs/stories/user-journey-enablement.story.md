@@ -111,6 +111,8 @@ Discovered via: [How-To Example Walkthrough](../howto/example.md)
 
 **Note**: Cursor auto-discovers skills from `.claude/skills/`, `.cursor/skills/`, and `~/.claude/skills/`. Skills do NOT need to be duplicated into `.cursor/skills/`. However, `.cursor/skills/` currently has 3 redundant copies (`init-memory`, `log-session`, `recall`) that should be removed to avoid confusion.
 
+**Note**: Unlike skills, Cursor does **not** auto-discover `.claude/rules/`. Rules are client-specific: Claude Code uses `.claude/rules/*.md` (with `paths` frontmatter), Cursor uses `.cursor/rules/*.mdc` (with `alwaysApply`/`description`/`globs` frontmatter). A sync mechanism is needed to keep rules consistent across both clients without manual duplication.
+
 - [ ] TASK-012: Remove redundant `.cursor/skills/` copies
   - Cursor auto-discovers `.claude/skills/` — duplicates in `.cursor/skills/` are unnecessary
   - Remove: `.cursor/skills/init-memory/`, `.cursor/skills/log-session/`, `.cursor/skills/recall/`
@@ -179,13 +181,18 @@ Discovered via: [How-To Example Walkthrough](../howto/example.md)
 
 #### Claude Code: Use `.claude/rules/` for Conditional Context
 
-- [ ] TASK-023: Adopt `.claude/rules/*.md` for path-specific coding standards
-  - Claude Code now supports `.claude/rules/` with `paths` frontmatter for conditional loading
-  - Currently all context lives in `context/` directory — not auto-loaded, only referenced
-  - Move key standards into `.claude/rules/` so they auto-load when working with matching files:
-    - `typescript.md` with `paths: ["**/*.ts", "**/*.tsx"]`
-    - `testing.md` with `paths: ["**/*.test.*", "**/*.spec.*"]`
+- [ ] TASK-023: Create shared rules system with cross-client sync
+  - Claude Code uses `.claude/rules/*.md` with `paths` frontmatter — Cursor does **not** auto-discover these
+  - Cursor uses `.cursor/rules/*.mdc` with `alwaysApply`/`description`/`globs` frontmatter — Claude Code does **not** auto-discover these
+  - Rules must exist in both locations with client-appropriate frontmatter
+  - Approach: author canonical rules in `context/coding-standards/`, then generate client-specific rule files:
+    - `.claude/rules/typescript.md` with `paths: ["**/*.ts", "**/*.tsx"]`
+    - `.cursor/rules/typescript-standards.mdc` with `globs: ["**/*.ts", "**/*.tsx"]`
+    - `.claude/rules/testing.md` with `paths: ["**/*.test.*", "**/*.spec.*"]`
+    - `.cursor/rules/testing-standards.mdc` with `globs: ["**/*.test.*", "**/*.spec.*"]`
+  - Add a `make sync-rules` target (or script in `scripts/`) that generates both formats from canonical source
   - This replaces TASK-009 approach — use native rules instead of hooks
+  - Replaces the current pattern where `.cursor/rules/` just references `context/` files without injecting content
 
 #### Claude Code: Use `@import` Syntax in CLAUDE.md
 
@@ -240,7 +247,7 @@ TASK-017 → TASK-018
 
 ### Track G: Hook + Rules Infrastructure (can start immediately)
 TASK-022 → TASK-005
-TASK-023 (replaces TASK-009 approach)
+TASK-023 (shared rules with cross-client sync — replaces TASK-009 approach)
 TASK-024 (CLAUDE.md imports)
 
 ---
@@ -262,7 +269,7 @@ TASK-024 (CLAUDE.md imports)
 - [ ] Feature finish with PR description generation
 - [ ] Skills use `$ARGUMENTS` for input
 - [ ] Read-only skills restricted with `allowed-tools`
-- [ ] `.claude/rules/` adopted for conditional coding standards
+- [ ] Shared rules system with sync to both `.claude/rules/` and `.cursor/rules/`
 - [ ] CLAUDE.md uses `@import` to inject context files
 
 ### Nice to Have
@@ -280,7 +287,9 @@ TASK-024 (CLAUDE.md imports)
 - Skills in `.claude/skills/` are auto-discovered by both Claude Code and Cursor — no duplication needed
 - `.mdc` is a valid current Cursor rules format (it's `.cursorrules` root file that's deprecated)
 - Claude Code hooks are JSON in `settings.json`, not markdown files
-- Claude Code `.claude/rules/` supports `paths` frontmatter — use for conditional coding standards
+- Claude Code `.claude/rules/` supports `paths` frontmatter — Cursor does NOT auto-discover these (unlike skills)
+- Rules must be synced to both `.claude/rules/` and `.cursor/rules/` with client-appropriate frontmatter
+- Canonical rule content lives in `context/coding-standards/`; a sync script generates client-specific files
 - CLAUDE.md `@import` syntax can inject context files directly
 - Side-effect skills (`init-memory`, `log-session`, `generate-prd`) must be user-invocable only
 - Memory writes must use existing atomic-write and file-lock scripts
@@ -300,7 +309,9 @@ TASK-024 (CLAUDE.md imports)
 - How verbose should the session-start hook be?
 - Should Cursor rules be `alwaysApply` or agent-decided? Token cost vs reliability tradeoff
 - Should `/architect` use `context: fork` with `agent: Plan` or custom agent?
-- Should `.claude/rules/` replace or supplement the `context/` directory approach?
+- Should `.claude/rules/` and `.cursor/rules/` replace or supplement the `context/` directory approach?
+- Should the sync script be part of `make install` or a separate `make sync-rules` target?
+- Should the sync script use symlinks, file generation, or a template approach?
 
 ---
 
@@ -315,9 +326,15 @@ TASK-024 (CLAUDE.md imports)
 .claude/skills/finish-feature/SKILL.md
 .claude/skills/check-memory/SKILL.md
 
-# Conditional coding standards (Claude Code .claude/rules/)
+# Conditional coding standards (both clients — generated from canonical source)
 .claude/rules/typescript.md (with paths: ["**/*.ts", "**/*.tsx"])
 .claude/rules/testing.md (with paths: ["**/*.test.*", "**/*.spec.*"])
+# Cursor equivalents (generated alongside Claude rules)
+.cursor/rules/typescript-standards.mdc (with globs: ["**/*.ts", "**/*.tsx"])
+.cursor/rules/testing-standards.mdc (with globs: ["**/*.test.*", "**/*.spec.*"])
+
+# Rules sync script
+scripts/sync-rules.sh (generates client-specific rules from context/coding-standards/)
 
 # Hook scripts
 .claude/hooks/session-start.sh (SessionStart command handler)

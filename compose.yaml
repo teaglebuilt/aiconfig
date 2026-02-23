@@ -2,5 +2,7 @@ services:
   claude-code:
     build: .
     working_dir: /workspace/aiconfig
+    environment:
+      CLAUDE_CODE_DISABLE_AUTO_MEMORY: 0
     volumes:
       - ${PWD}:/workspace/aiconfig

@@ -16,8 +16,9 @@ AIConfig is a portable, centralized configuration system that enables seamless c
 │  │  ┌─────────┐  ┌─────────┐   │    │  ┌─────────────────────┐    │   │
 │  │  │.claude/ │  │.cursor/ │   │    │  │     context/        │    │   │
 │  │  │ agents  │  │ agents  │   │    │  │  coding-standards/  │    │   │
-│  │  │ skills  │  │ skills  │   │    │  │  workflows/         │    │   │
-│  │  │ hooks   │  │ rules   │   │    │  │  prompts/           │    │   │
+│  │  │ skills  │  │ rules   │   │    │  │  workflows/         │    │   │
+│  │  │commands │  │         │   │    │  │  prompts/           │    │   │
+│  │  │ hooks   │  │         │   │    │  │  knowledge/         │    │   │
 │  │  └─────────┘  └─────────┘   │    │  │  knowledge/         │    │   │
 │  └─────────────────────────────┘    │  └─────────────────────┘    │   │
 │                                     │  (static, human-authored)   │   │
@@ -51,14 +52,13 @@ AIConfig is a portable, centralized configuration system that enables seamless c
 aiconfig/
 ├── .claude/                    # Claude Code client config
 │   ├── agents/                 # Custom agent definitions
-│   ├── commands/               # Slash commands
+│   ├── commands/               # Slash commands (legacy, still supported)
 │   ├── hooks/                  # Event hooks
-│   └── skills/                 # Portable skills
+│   └── skills/                 # Skills (primary extension mechanism)
 │
 ├── .cursor/                    # Cursor client config
 │   ├── agents/                 # Custom agent definitions
-│   ├── rules/                  # Context rules (.mdc files)
-│   └── skills/                 # Portable skills
+│   └── rules/                  # Context rules (.mdc files)
 │
 ├── context/                    # Shared coding context
 │   ├── coding-standards/       # TypeScript, testing standards
@@ -162,9 +162,9 @@ This enables:
 | Component | Path | Purpose |
 |-----------|------|---------|
 | Agents | `.claude/agents/*.md` | Custom agent definitions |
-| Skills | `.claude/skills/*/SKILL.md` | Invokable skills (/init-memory, /recall) |
-| Commands | `.claude/commands/*.md` | Slash commands |
-| Hooks | `.claude/hooks/*.md` | Event triggers |
+| Skills | `.claude/skills/*/SKILL.md` | Primary extension mechanism — invokable via `/name`, auto-discovered by Claude and Cursor |
+| Commands | `.claude/commands/*.md` | Legacy slash commands (merged into skills, still supported) |
+| Hooks | `.claude/settings.json` | Event-driven automation (JSON config, not markdown) |
 
 **MCP Integration**: `~/.config/claude-code/settings.json`
 
@@ -295,25 +295,37 @@ Both clients connect to shared MCP servers:
 
 ## Skills & Agents
 
-### Portable Skills
+### Skills (Primary Extension Mechanism)
 
-Skills are defined in `SKILL.md` format and work across both clients:
+Skills are defined in `SKILL.md` format and auto-discovered by both Claude Code and Cursor from `.claude/skills/`. Do not duplicate into `.cursor/skills/`.
 
-| Skill | Purpose | Trigger |
-|-------|---------|---------|
-| `/init-memory` | Initialize project memory | Start of new project |
-| `/log-session` | Record session to memory | End of coding session |
-| `/recall` | Search past context | Finding previous work |
+| Skill | Purpose | Side Effects |
+|-------|---------|--------------|
+| `/init-memory` | Initialize project memory | Writes files |
+| `/log-session` | Record session to memory | Writes files |
+| `/recall` | Search past context | Read-only |
+| `/generate-prd` | Generate a PRD | Writes files |
+| `/architect` | Architecture analysis | Read-only |
 
 **Skill structure**:
 ```
 .claude/skills/
-└── init-memory/
-    └── SKILL.md
-.cursor/skills/
-└── init-memory/
-    └── SKILL.md
+├── init-memory/SKILL.md
+├── log-session/SKILL.md
+├── recall/SKILL.md
+├── generate-prd/SKILL.md
+└── architect/
+    ├── SKILL.md
+    ├── domains/
+    ├── resources/
+    └── templates/
 ```
+
+### Commands (Legacy, Still Supported)
+
+Simple single-file slash commands in `.claude/commands/*.md`. Merged into the skills system — both create `/slash-commands` and support the same frontmatter. Use skills for new development; commands remain for lightweight prompts that don't need supporting files.
+
+See [Commands vs Skills](./features/commands.md) for detailed guidance.
 
 ### Custom Agents
 

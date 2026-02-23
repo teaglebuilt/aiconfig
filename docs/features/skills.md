@@ -1,47 +1,114 @@
 # Skills
 
-Skills are reusable prompts that extend agent capabilities.
+Skills are reusable prompts that extend agent capabilities. They are the **primary extension mechanism** for Claude Code and are also discovered by Cursor.
 
-### Available Skills
+> Custom slash commands have been merged into skills. Files in `.claude/commands/` still work, but skills are recommended for new development. See [Commands](./commands.md) for the distinction.
 
-| Skill | Trigger | Description |
-|-------|---------|-------------|
-| `/init-memory` | "init memory", "setup memory" | Initialize project memory structure |
-| `/log-session` | "log session", "end session" | Record session to project memory |
-| `/recall` | "recall", "remember", "what did we decide" | Search memory for past context |
-| `/generate-prd` | "create a prd", "plan this feature" | Generate Product Requirements Document |
-| `/generate-prd-to-json` | "convert this prd", "ralph json" | Convert PRD to Ralph agent format |
+## Available Skills
 
-### Skill Discovery
+| Skill | Description | Side Effects |
+|-------|-------------|--------------|
+| `/init-memory` | Initialize project memory structure with context, session, and decision tracking | Writes files |
+| `/log-session` | Record session accomplishments, decisions, and follow-ups to project memory | Writes files |
+| `/recall` | Search project memory for past decisions, similar problems, or session history | Read-only |
+| `/generate-prd` | Generate a Product Requirements Document for a feature | Writes files |
+| `/generate-prd-to-json` | Convert a PRD to Ralph autonomous agent JSON format | Writes files |
+| `/architect` | Deep architecture analysis, pattern evaluation, and decision documentation | Read-only |
 
-Skills are auto-discovered from these locations:
+## Skill Discovery
 
-| Location | Scope | Client |
-|----------|-------|--------|
-| `.cursor/skills/` | Project | Cursor |
+Skills are auto-discovered from these locations (highest priority first):
+
+| Location | Scope | Discovered By |
+|----------|-------|---------------|
+| Enterprise managed settings | Organization | Claude Code |
+| `~/.claude/skills/` | Personal (all projects) | Claude Code, Cursor |
 | `.claude/skills/` | Project | Claude Code, Cursor |
-| `~/.cursor/skills/` | Global | Cursor |
-| `~/.claude/skills/` | Global | Claude Code, Cursor |
+| Nested `.claude/skills/` in subdirs | Package (monorepo) | Claude Code |
 
-Both clients use the same `SKILL.md` format - skills are portable.
+Both clients discover `.claude/skills/` — **do not duplicate skills into `.cursor/skills/`**.
 
-### Skill Structure
+## Skill Structure
 
 ```
-.claude/skills/              # Shared (both clients)
-├── init-memory/SKILL.md
-├── log-session/SKILL.md
-├── recall/SKILL.md
-├── generate-prd/SKILL.md
-└── generate-prd-to-json/SKILL.md
-
-.cursor/skills/              # Cursor-specific (optional)
-├── init-memory/SKILL.md
-├── log-session/SKILL.md
-└── recall/SKILL.md
+.claude/skills/
+├── init-memory/SKILL.md        # Memory initialization
+├── log-session/SKILL.md        # Session logging
+├── recall/SKILL.md             # Memory search
+├── generate-prd/SKILL.md       # PRD generation
+├── generate-prd-to-json/SKILL.md  # PRD to JSON conversion
+└── architect/                   # Architecture analysis
+    ├── SKILL.md                 # Entry point
+    ├── domains/                 # Domain-specific references
+    ├── resources/               # Analysis frameworks
+    └── templates/               # Output templates
 ```
 
-### Memory Skills Workflow
+Each skill is a directory with `SKILL.md` as the entry point. Additional files (templates, scripts, reference docs) can live alongside it — reference them from `SKILL.md` so Claude knows when to load them.
+
+## Frontmatter Reference
+
+```yaml
+---
+name: my-skill                    # Slash command name (defaults to directory name)
+description: What this skill does  # How Claude decides when to use it
+disable-model-invocation: true     # Only user can invoke (prevents auto-invocation)
+user-invocable: false              # Only Claude can invoke (hides from / menu)
+allowed-tools: Read, Grep, Glob   # Restrict tool access when skill is active
+context: fork                      # Run in isolated subagent
+agent: Explore                     # Subagent type (when context: fork)
+argument-hint: "[search query]"    # Autocomplete hint for arguments
+model: sonnet                      # Model override for this skill
+---
+```
+
+All fields are optional. Only `description` is recommended.
+
+### Key Frontmatter Decisions
+
+| Scenario | Frontmatter |
+|----------|-------------|
+| Skill writes files (init-memory, log-session) | `disable-model-invocation: true` |
+| Background knowledge, not a user action | `user-invocable: false` |
+| Read-only information gathering | `allowed-tools: Read, Grep, Glob` |
+| Heavy analysis that shouldn't pollute context | `context: fork` with `agent: Explore` |
+| Skill accepts user input | Use `$ARGUMENTS` in content, add `argument-hint` |
+
+### Invocation Control
+
+| Frontmatter | User can invoke | Claude can invoke |
+|-------------|----------------|-------------------|
+| (default) | Yes | Yes |
+| `disable-model-invocation: true` | Yes | No |
+| `user-invocable: false` | No | Yes |
+
+## String Substitutions
+
+| Variable | Description |
+|----------|-------------|
+| `$ARGUMENTS` | All arguments passed after `/skill-name` |
+| `$ARGUMENTS[N]` or `$N` | Specific argument by index (0-based) |
+| `${CLAUDE_SESSION_ID}` | Current session ID |
+
+## Dynamic Context Injection
+
+Use `` !`command` `` to run shell commands before the skill content reaches Claude:
+
+```yaml
+---
+name: status
+description: Show current project status
+---
+## Current State
+- Branch: !`git branch --show-current`
+- Status: !`git status --short`
+
+Summarize the current project state.
+```
+
+The command output replaces the placeholder — Claude receives data, not the command.
+
+## Memory Skills Workflow
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
@@ -56,39 +123,8 @@ Both clients use the same `SKILL.md` format - skills are portable.
 └─────────────────┘     └─────────────────────────────────────────┘
 ```
 
-### Skill Format
+## References
 
-```markdown
----
-name: skill-name
-description: "Brief description. Triggers on: keyword1, keyword2."
----
-
-# Skill Title
-
-What this skill does.
-
-## The Job
-1. Step one
-2. Step two
-
-## Output
-What the skill produces.
-```
-
-#### Sharing Skills Across Clients
-
-Skills use an open standard - the same `SKILL.md` format works in both Claude Code and Cursor.
-
-**Project-level**: Place in `.claude/skills/` (both clients discover it)
-
-**Global-level**: The install script symlinks to `$HOME`:
-- `~/.claude/skills/` → Available to Claude Code and Cursor
-- `~/.cursor/skills/` → Available to Cursor
-
-**Invoking skills**: Type `/` in chat to see available skills, or use trigger phrases.
-
-#### References
-
-- [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills)
-- [Cursor Skills](https://cursor.com/docs/context/skills)
+- [Claude Code Skills Docs](https://code.claude.com/docs/en/skills) — canonical reference
+- [Agent Skills Open Standard](https://agentskills.io) — cross-tool skill format
+- [Commands](./commands.md) — legacy command format (still supported)

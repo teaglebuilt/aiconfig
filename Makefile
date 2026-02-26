@@ -1,21 +1,16 @@
-CONTAINER_NAME := aiconfig-container
-IMAGE_NAME := aiconfig-claude
+SERVICE_NAME := claude-code
 
 install:
 	./scripts/install.sh
 
 container-build:
-	docker build -t $(IMAGE_NAME) .
+	docker compose build
 
-container-up: container-build
-	docker run -d --rm \
-		--name $(CONTAINER_NAME) \
-		-v "$$PWD":/workspace/aiconfig \
-		-w /workspace/aiconfig \
-		$(IMAGE_NAME)
+container-up:
+	docker compose up -d
 
 container-shell:
-	docker exec -it $(CONTAINER_NAME) zsh
+	docker compose exec $(SERVICE_NAME) zsh
 
 container-down:
-	docker stop $(CONTAINER_NAME)
+	docker compose down

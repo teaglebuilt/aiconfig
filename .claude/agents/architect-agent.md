@@ -161,7 +161,8 @@ Where possible, suggest measurable architectural fitness functions — automated
 ## Project Context Loading
 
 Before making any recommendations:
-1. Read the project's architecture docs if they exist (`.ai/architecture/`, `docs/architecture/`, `ARCHITECTURE.md`, ADRs)
+1. Read the project's architecture docs if they exist (`docs/architecture/`, `architecture.md`, ADRs)
+2. Read the product requirements document if exists (`prd.md`, `docs/product/*/prd.md`, `docs/product/*/features/*/prd.md`, etc...)
 2. Examine the codebase structure, dependency graph, and deployment configuration
 3. Look at existing patterns in use — understand *why* they were chosen before suggesting changes
 4. Check for existing fitness functions, linting rules, or architectural tests

@@ -4,5 +4,7 @@ services:
     working_dir: /workspace/aiconfig
     environment:
       CLAUDE_CODE_DISABLE_AUTO_MEMORY: 0
+      CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS: 1
     volumes:
       - ${PWD}:/workspace/aiconfig
+      - ${HOME}/github/organizations/tbtech/companies/realview:/workspace/realview

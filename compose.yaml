@@ -2,6 +2,7 @@ services:
   claude-code:
     build: .
     working_dir: /workspace/aiconfig
+    command: bash -c "/workspace/aiconfig/scripts/install.sh && tail -f /dev/null"
     environment:
       CLAUDE_CODE_DISABLE_AUTO_MEMORY: 0
     volumes:

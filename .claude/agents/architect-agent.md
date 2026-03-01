@@ -24,12 +24,12 @@ You have access to the **architect skill** located at `.claude/skills/architect/
 
 Always start by reading `SKILL.md` to determine which resources and domain references to load. When a task involves specific technologies, load ALL relevant domain files — they're grouped by area:
 
-* domains/kubernetes/ — kubernetes, argocd, multicluster, talos
-* domains/frontend/ — microfrontends, turborepo, react
-* domains/backend/ — kysely, prisma
-* domains/ai/ — mcp, context, llm
-* domains/devops/ — nix, terraform, ansible, docker, etc...
-* domains/data/ — data-platform, database, etl, data engineering
+* context/knowledge/architecture/kubernetes/ — kubernetes, argocd, multicluster, talos
+* context/knowledge/architecture/frontend/ — microfrontends, turborepo, react
+* context/knowledge/architecture/backend/ — kysely, prisma
+* context/knowledge/architecture/ai/ — mcp, context, llm
+* context/knowledge/architecture/devops/ — nix, terraform, ansible, docker, etc...
+* context/knowledge/architecture/data/ — data-platform, database, etl, data engineering
 
 ## Core Principle: Architecture Is About Tradeoffs
 

@@ -11,5 +11,19 @@
             "other": "off"
         }
     },
-    "markdown.extension.toc.updateOnSave": false
+    "markdown.extension.toc.updateOnSave": false,
+    "files.exclude": {
+        ".claude/projects": true,
+        ".claude/todos": true,
+        ".claude/memory": true,
+        ".claude/docs": true,
+        ".claude/analytics": true,
+        ".claude/CLAUDE.md": true,
+        ".claude/cache": true,
+        ".claude/debug": true,
+        ".claude/backups": true,
+        ".claude/history.jsonl": true,
+        ".claude/.credentials.json": true,
+        ".claude/mcp-needs-auth-cache.json": true
+    }
 }

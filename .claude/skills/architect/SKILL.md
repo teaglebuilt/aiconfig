@@ -1,3 +1,11 @@
+---
+name: architect
+description: universal architecture
+context: fork
+agent: architect-agent
+model: opus
+---
+
 # Software Architecture Skill
 
 > Use this skill when making architectural decisions, reviewing system design, analyzing codebase structure, generating architecture diagrams, or evaluating pattern fitness for a project.
@@ -55,8 +63,9 @@ When comparing patterns or making a structural decision:
 When a decision needs to be documented:
 
 1. Read `templates/adr-template.md`
+2. Read any documentation in `docs/` folder that applies to the input.
 2. Fill in all sections: context, decision drivers, considered options, decision outcome, consequences
-3. Save to the project's ADR directory (typically `docs/adr/` or `.ai/architecture/decisions/`)
+3. Save to the project's ADR directory (typically `docs/adr/` or `.docs/architecture/decisions/`)
 4. Name with sequential numbering: `NNNN-short-description.md`
 
 ### 4. Generate Architecture Diagrams

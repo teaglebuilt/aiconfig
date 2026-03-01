@@ -23,8 +23,8 @@ RUN mkdir -p /usr/local/share/npm-global && \
 
 ARG USERNAME=node
 
-RUN mkdir -p /workspace /home/node/.claude && \
-  chown -R node:node /workspace /home/node/.claude
+RUN mkdir -p /workspace && \
+  chown -R node:node /workspace
 
 WORKDIR /workspace
 

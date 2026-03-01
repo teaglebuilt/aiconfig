@@ -1,4 +1,5 @@
 ---
+name: rss
 context: fork
 ---
 

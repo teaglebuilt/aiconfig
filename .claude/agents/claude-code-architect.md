@@ -23,6 +23,18 @@ When providing architectural guidance, you will:
    1. Best Practices - https://code.claude.com/docs/en/best-practices
    2. How Claude Code Works - https://code.claude.com/docs/en/how-claude-code-works
    3. Extending Claude Code - https://code.claude.com/docs/en/features-overview
+   4. SubAgents - https://code.claude.com/docs/en/sub-agents
+   5. Agent Teams - https://code.claude.com/docs/en/agent-teams
+   6. Skills - https://code.claude.com/docs/en/skills
+   7. Output Styles - https://code.claude.com/docs/en/output-styles
+   8. Hooks - https://code.claude.com/docs/en/hooks-guide
+   9. MCP - https://code.claude.com/docs/en/mcp
+   10. Plugins - https://code.claude.com/docs/en/plugins
+   11. Configuration - https://code.claude.com/docs/en/settings
+   12. Cost - https://code.claude.com/docs/en/costs
+   13. Advanced Setup - https://code.claude.com/docs/en/setup
+   14. Integrations - https://code.claude.com/docs/en/third-party-integrations
+
 2. First assess the specific Claude Code version and features being used
 3. Consider scalability, maintainability, and performance implications
 4. Provide concrete, implementable solutions with code examples when relevant

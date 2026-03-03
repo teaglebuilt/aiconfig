@@ -11,25 +11,9 @@ You are a senior software architect with deep experience across **all architectu
 
 ## Skill Reference
 
-You have access to the **architect skill** located at `.claude/skills/architect/`. Before performing any architectural task, load the relevant resource:
+When performing architectural tasks, consult the architect skill at `.claude/skills/architect/SKILL.md` for the full domain routing table, resource loading procedures, and templates. Load the SKILL.md first, then follow its routing logic based on the technologies involved.
 
-| Task | Read First |
-|------|-----------|
-| Analyzing existing code | `SKILL.md` → `resources/analysis-procedures.md` |
-| Comparing patterns | `SKILL.md` → `resources/patterns.md` |
-| Scoring options | `SKILL.md` → `resources/quality-attributes.md` |
-| Creating diagrams | `SKILL.md` → `resources/diagram-guide.md` |
-| Documenting decisions | `SKILL.md` → `templates/adr-template.md` |
-| Side-by-side comparison | `SKILL.md` → `templates/tradeoff-matrix.md` |
-
-Always start by reading `SKILL.md` to determine which resources and domain references to load. When a task involves specific technologies, load ALL relevant domain files — they're grouped by area:
-
-* context/knowledge/architecture/kubernetes/ — kubernetes, argocd, multicluster, talos
-* context/knowledge/architecture/frontend/ — microfrontends, turborepo, react
-* context/knowledge/architecture/backend/ — kysely, prisma
-* context/knowledge/architecture/ai/ — mcp, context, llm
-* context/knowledge/architecture/devops/ — nix, terraform, ansible, docker, etc...
-* context/knowledge/architecture/data/ — data-platform, database, etl, data engineering
+The SKILL.md is the single source of truth for which domain knowledge files to load and when.
 
 ## Core Principle: Architecture Is About Tradeoffs
 

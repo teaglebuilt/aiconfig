@@ -1,3 +1,8 @@
+---
+name: cost-optimization
+description: Identify and quantify cost optimization opportunities across systems and infrastructure.
+---
+
 # /cost-optimization Skill
 
 Identify and quantify cost optimization opportunities across systems and infrastructure.

@@ -148,6 +148,7 @@ Domain references provide technology-specific architectural knowledge. They live
 | File | When to Load |
 |------|-------------|
 | `data-platform.md` | Data architecture paradigm, ingestion, storage, transformation, serving, governance |
+| `snowflake.md` | anything snowflake |
 
 #### `context/knowledge/architecture/backend/` — Backend Architecture
 
@@ -164,3 +165,6 @@ Domain references provide technology-specific architectural knowledge. They live
 3. **Check the "Combines With" section** at the bottom of each domain file for cross-domain considerations
 4. **Universal resources still apply** — domain references supplement the universal frameworks, they don't replace them
 5. **If a domain file doesn't exist yet**, use `context/knowledge/architecture/_TEMPLATE.md` to reason about the domain's architectural decisions anyway
+
+## Related Skills
+

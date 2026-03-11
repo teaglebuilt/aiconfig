@@ -34,3 +34,423 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 ~/github/teaglebuilt/aiconfig  master +139 -133 [$!?]   colimais 󰏗 v0.0.1 on   (us-east-1) 
  17:50:01 ❯❯❯ git add .
+~/github/teaglebuilt/aiconfig  master +1 -1 [$!+]   colimais 󰏗 v0.0.1 on   (us-east-1) 
+ 17:50:15 ❯❯❯ git commit -m "fix agent context"
+[master 010b215] fix agent context
+ 377 files changed, 18474 insertions(+), 133 deletions(-)
+ create mode 100644 .claude/agents/claude-code-agent.md
+ create mode 100644 .claude/commands/scrape.md
+ create mode 100644 .claude/skills/claude-code/SKILL.md
+ create mode 100644 .claude/skills/claude-code/references/decision-frameworks.md
+ create mode 100644 .claude/skills/claude-code/references/hooks.md
+ create mode 100644 .claude/skills/claude-code/references/observability.md
+ create mode 100644 .claude/skills/claude-code/references/orchestration.md
+ create mode 100644 .claude/skills/claude-code/references/quality-gates.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/agent-transcripts/8995b928-223a-4fc7-b13d-f30b2ed8dab3/8995b928-223a-4fc7-b13d-f30b2ed8dab3.jsonl
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/agent-transcripts/f779979e-49f9-4faf-94f1-4e001d23cf73/f779979e-49f9-4faf-94f1-4e001d23cf73.jsonl
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/INSTRUCTIONS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_click.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_console_messages.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_drag.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_fill.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_fill_form.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_get_attribute.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_get_bounding_box.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_get_input_value.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_handle_dialog.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_highlight.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_hover.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_is_checked.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_is_enabled.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_is_visible.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_lock.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_navigate.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_navigate_back.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_navigate_forward.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_network_requests.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_press_key.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_profile_start.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_profile_stop.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_reload.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_resize.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_scroll.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_select_option.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_snapshot.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_tabs.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_take_screenshot.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_type.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_unlock.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/cursor-ide-browser/tools/browser_wait_for.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/INSTRUCTIONS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/resources/docs-overview.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/resources/livekit-sdks.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/resources/python-agent-examples-index.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/code_search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/docs_search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/get_changelog.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/get_docs_overview.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/get_pages.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/get_python_agent_example.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/get_sdks.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-livekit-docs/tools/submit_docs_feedback.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/apply_migration.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/confirm_cost.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/create_branch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/create_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/delete_branch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/deploy_edge_function.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/execute_sql.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/generate_typescript_types.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_advisors.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_cost.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_edge_function.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_logs.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_organization.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_project_url.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/get_publishable_keys.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/list_branches.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/list_edge_functions.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/list_extensions.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/list_migrations.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/list_organizations.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/list_projects.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/list_tables.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/merge_branch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/pause_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/rebase_branch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/reset_branch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/restore_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/project-0-realview-supabase/tools/search_docs.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/prompts/continue_conversation.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/prompts/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/prompts/search_knowledge_base.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/resources/ai_assistant_guide.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/build_context.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/canvas.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/cloud_info.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/create_memory_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/delete_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/delete_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/edit_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/fetch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/list_directory.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/list_memory_projects.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/list_workspaces.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/move_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/read_content.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/read_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/release_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/schema_diff.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/schema_infer.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/schema_validate.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/search_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/view_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-basic-memory/tools/write_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-filesystem/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-filesystem/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-lancedb/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/mcps/user-lancedb/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech-companies-realview/terminals/1.txt
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/INSTRUCTIONS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_click.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_console_messages.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_drag.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_fill.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_fill_form.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_get_attribute.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_get_bounding_box.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_get_input_value.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_handle_dialog.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_highlight.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_hover.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_is_checked.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_is_enabled.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_is_visible.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_lock.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_navigate.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_navigate_back.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_navigate_forward.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_network_requests.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_press_key.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_profile_start.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_profile_stop.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_reload.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_resize.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_scroll.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_select_option.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_snapshot.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_tabs.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_take_screenshot.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_type.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_unlock.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/cursor-ide-browser/tools/browser_wait_for.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/prompts/continue_conversation.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/prompts/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/prompts/search_knowledge_base.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/resources/ai_assistant_guide.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/build_context.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/canvas.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/cloud_info.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/create_memory_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/delete_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/delete_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/edit_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/fetch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/list_directory.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/list_memory_projects.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/list_workspaces.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/move_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/read_content.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/read_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/release_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/schema_diff.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/schema_infer.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/schema_validate.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/search_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/view_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-basic-memory/tools/write_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-filesystem/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-filesystem/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-lancedb/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-organizations-tbtech/mcps/user-lancedb/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/INSTRUCTIONS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_click.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_console_messages.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_drag.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_fill.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_fill_form.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_get_attribute.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_get_bounding_box.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_get_input_value.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_handle_dialog.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_highlight.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_hover.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_is_checked.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_is_enabled.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_is_visible.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_lock.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_navigate.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_navigate_back.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_navigate_forward.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_network_requests.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_press_key.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_profile_start.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_profile_stop.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_reload.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_resize.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_scroll.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_select_option.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_snapshot.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_tabs.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_take_screenshot.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_type.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_unlock.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/cursor-ide-browser/tools/browser_wait_for.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/prompts/continue_conversation.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/prompts/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/prompts/search_knowledge_base.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/resources/ai_assistant_guide.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/build_context.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/canvas.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/cloud_info.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/create_memory_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/delete_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/delete_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/edit_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/fetch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/list_directory.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/list_memory_projects.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/list_workspaces.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/move_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/read_content.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/read_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/release_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/schema_diff.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/schema_infer.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/schema_validate.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/search_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/view_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-basic-memory/tools/write_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-filesystem/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-filesystem/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-lancedb/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/project-0-aiconfig-lancedb/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/prompts/continue_conversation.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/prompts/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/prompts/search_knowledge_base.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/resources/ai_assistant_guide.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/build_context.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/canvas.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/cloud_info.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/create_memory_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/delete_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/delete_project.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/edit_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/fetch.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/list_directory.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/list_memory_projects.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/list_workspaces.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/move_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/read_content.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/read_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/recent_activity.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/release_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/schema_diff.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/schema_infer.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/schema_validate.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/search.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/search_notes.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/view_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-basic-memory/tools/write_note.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-filesystem/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-filesystem/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-lancedb/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/mcps/user-lancedb/STATUS.md
+ create mode 100644 .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/terminals/1.txt
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/INSTRUCTIONS.md
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_click.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_console_messages.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_drag.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_fill.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_fill_form.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_get_attribute.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_get_bounding_box.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_get_input_value.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_handle_dialog.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_highlight.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_hover.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_is_checked.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_is_enabled.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_is_visible.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_lock.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_navigate.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_navigate_back.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_navigate_forward.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_network_requests.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_press_key.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_profile_start.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_profile_stop.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_reload.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_resize.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_scroll.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_search.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_select_option.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_snapshot.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_tabs.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_take_screenshot.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_type.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_unlock.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/cursor-ide-browser/tools/browser_wait_for.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/prompts/continue_conversation.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/prompts/recent_activity.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/prompts/search_knowledge_base.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/resources/ai_assistant_guide.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/build_context.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/canvas.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/cloud_info.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/create_memory_project.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/delete_note.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/delete_project.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/edit_note.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/fetch.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/list_directory.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/list_memory_projects.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/list_workspaces.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/move_note.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/read_content.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/read_note.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/recent_activity.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/release_notes.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/schema_diff.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/schema_infer.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/schema_validate.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/search.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/search_notes.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/view_note.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-basic-memory/tools/write_note.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-filesystem/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-filesystem/STATUS.md
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-lancedb/SERVER_METADATA.json
+ create mode 100644 .cursor/projects/var-folders-73-k3wdvlq12733mx9cv4wk6gzh0000gn-T-1be6a98a-b3e6-4826-ab0c-e17fd0289db3/mcps/user-lancedb/STATUS.md
+ create mode 100644 .cursor/skills-cursor/.cursor-managed-skills-manifest.json
+ create mode 100644 .cursor/skills-cursor/create-rule/SKILL.md
+ create mode 100644 .cursor/skills-cursor/create-skill/SKILL.md
+ create mode 100644 .cursor/skills-cursor/create-subagent/SKILL.md
+ create mode 100644 .cursor/skills-cursor/migrate-to-skills/SKILL.md
+ create mode 100644 .cursor/skills-cursor/shell/SKILL.md
+ create mode 100644 .cursor/skills-cursor/update-cursor-settings/SKILL.md
+ create mode 100644 context/knowledge/docs/ai/claude_code/best-practices.md
+ create mode 100644 context/knowledge/docs/ai/claude_code/claude-code-agent-teams.md
+ create mode 100644 context/knowledge/docs/ai/claude_code/claude-code-sub-agents.md
+ create mode 100644 context/knowledge/docs/ai/claude_code/features-overview.md
+ create mode 100644 context/knowledge/docs/cloudflare/networking.md
+ create mode 100644 context/knowledge/docs/cloudflare/workers.md
+~/github/teaglebuilt/aiconfig  master +374 -2 [$!]   colimais 󰏗 v0.0.1 on   (us-east-1) 
+ 17:50:27 ❯❯❯ git push origin master
+To https://github.com/teaglebuilt/aiconfig.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/teaglebuilt/aiconfig.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/github/teaglebuilt/aiconfig  master +385 -2 [$!]   colimais 󰏗 v0.0.1 on   (us-east-1) 
+ 17:50:33 ❯❯❯ git pull origin master
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 5 (delta 3), reused 5 (delta 3), pack-reused 0 (from 0)
+Unpacking objects: 100% (5/5), 1.77 KiB | 302.00 KiB/s, done.
+From https://github.com/teaglebuilt/aiconfig
+ * branch            master     -> FETCH_HEAD
+   cfba13b..37a181a  master     -> origin/master
+Merge made by the 'ort' strategy.
+ .claude/agents/docs-scraper.md | 70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
+ create mode 100644 .claude/agents/docs-scraper.md
+~/github/teaglebuilt/aiconfig  master +398 -2 [$!]   colimais 󰏗 v0.0.1 on   (us-east-1) 4s
+ 17:50:42 ❯❯❯ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .claude/agents/docs-scraper.md
+        modified:   .claude/commands/scrape.md
+        modified:   .claude/skills/claude-code/SKILL.md
+        modified:   .cursor/projects/Users-teaglebuilt-github-teaglebuilt-aiconfig/terminals/1.txt
+        modified:   .vscode/settings.json
+        deleted:    context/knowledge/docs/ai/claude_code/best-practices.md
+        deleted:    context/knowledge/docs/ai/claude_code/claude-code-agent-teams.md
+        deleted:    context/knowledge/docs/ai/claude_code/claude-code-sub-agents.md
+        deleted:    context/knowledge/docs/ai/claude_code/features-overview.md
+        modified:   docs/features/commands.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        context/knowledge/docs/claude_code/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+~/github/teaglebuilt/aiconfig  master +428 -1199 [$✘!?]   colimais 󰏗 v0.0.1 on   (us-east-1) 
+ 18:04:08 ❯❯❯ git add .

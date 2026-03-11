@@ -44,5 +44,7 @@
         ".claude/history.jsonl": true,
         ".claude/.credentials.json": true,
         ".claude/mcp-needs-auth-cache.json": true
-    }
+    },
+    "terminal.integrated.tabs.showActions": "never",
+    "terminal.integrated.tabs.enabled": true
 }

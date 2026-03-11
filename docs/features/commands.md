@@ -35,6 +35,7 @@ Current commands in this project:
 | `/market-gap` | Generate business solutions using strategic frameworks |
 | `/pain-points` | Extract pain points from forum discussions |
 | `/youtube` | Manage YouTube channel subscriptions |
+| `/scrape` | Scrape websites and convert to markdown |
 
 ## When to Use Skills Instead
 

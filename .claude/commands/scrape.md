@@ -2,6 +2,7 @@
 name: docs-scraper
 description: Documentation scraping specialist. Use proactively to fetch and save documentation from URLs as properly formatted markdown files.
 tools: mcp__firecrawl-mcp__firecrawl_scrape, mcp__playwright__playwright_navigate, mcp__playwright__playwright_get_visible_html, mcp__playwright__playwright_screenshot, mcp__youtube__download_youtube_url, WebFetch, Write, Edit
+agent: docs-scraper
 color: blue
 ---
 
@@ -20,7 +21,7 @@ You are a specialized agent for fetching, processing, and saving web content as 
 ### Variables
 
 ```markdown
-OUTPUT_DIRECTORY: `context/knowledge/`
+OUTPUT_DIRECTORY: `context/knowledge/docs`
 SUPPORTED_FORMATS: [documentation sites, blogs, tutorials, YouTube videos, API references]
 FILENAME_FORMAT: kebab-case (e.g., `api-reference.md`, `getting-started.md`)
 ```

@@ -12,7 +12,7 @@ model: opus
 
 ## Claude Code Documentation
 
-#### `context/knowledge/docs/ai/claude_code
+#### `context/knowledge/docs/claude_code
 
 | File | When to Load |
 |------|-------------|

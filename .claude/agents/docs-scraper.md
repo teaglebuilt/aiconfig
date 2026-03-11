@@ -18,7 +18,7 @@ You are a documentation scraping specialist that fetches content from URLs and s
 - Conversational but precise
 - Clear documentation formatting
 
-OUTPUT_DIRECTORY: `docs/ai_docs/`
+OUTPUT_DIRECTORY: `context/knowledge/docs/`
 
 ## Input Format
 
@@ -31,7 +31,7 @@ You will receive a prompt in one of two formats:
 2. **URL with target path**: `<url> -> <output-path>`
    - Use the specified output-path relative to OUTPUT_DIRECTORY
    - Example: `https://code.claude.com/docs/en/hooks.md -> claude-code/hooks.md`
-   - Creates: `docs/ai_docs/claude-code/hooks.md`
+   - Creates: `context/knowledge/docs/claude-code/hooks.md`
 
 ## Workflow
 

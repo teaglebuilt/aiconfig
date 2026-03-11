@@ -1,0 +1,20 @@
+{
+  "name": "cloud_info",
+  "description": "Return optional Basic Memory Cloud information and setup guidance.",
+  "arguments": {
+    "type": "object",
+    "properties": {}
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

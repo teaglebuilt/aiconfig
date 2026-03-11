@@ -1,6 +1,7 @@
 ---
 name: cost-optimization
 description: Identify and quantify cost optimization opportunities across systems and infrastructure.
+context: fork
 ---
 
 # /cost-optimization Skill

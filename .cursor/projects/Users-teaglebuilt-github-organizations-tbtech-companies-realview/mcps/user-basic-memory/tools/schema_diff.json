@@ -1,0 +1,66 @@
+{
+  "name": "schema_diff",
+  "description": "Detect drift between a schema definition and actual note usage.",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "note_type": {
+        "type": "string"
+      },
+      "project": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "workspace": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "output_format": {
+        "default": "text",
+        "enum": [
+          "text",
+          "json"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "note_type"
+    ],
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

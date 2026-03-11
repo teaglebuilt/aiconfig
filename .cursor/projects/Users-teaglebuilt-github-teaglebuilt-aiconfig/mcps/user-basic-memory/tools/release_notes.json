@@ -1,0 +1,20 @@
+{
+  "name": "release_notes",
+  "description": "Return the latest product release notes for optional user review.",
+  "arguments": {
+    "type": "object",
+    "properties": {}
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

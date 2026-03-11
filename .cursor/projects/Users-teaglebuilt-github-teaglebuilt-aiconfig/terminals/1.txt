@@ -1,0 +1,36 @@
+---
+pid: 5413
+cwd: /Users/teaglebuilt/github/teaglebuilt/aiconfig
+last_command: git status
+last_exit_code: 0
+---
+direnv: loading ~/github/teaglebuilt/aiconfig/.envrc                                                                                                                                                       
+direnv: export +OPENROUTER_API_KEY
+~/github/teaglebuilt/aiconfig  master +139 -133 [$!?]   colimais 󰏗 v0.0.1 on   (us-east-1) 
+ 17:48:59 ❯❯❯ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .claude/agents/architect-agent.md
+        modified:   .claude/skills/architect/SKILL.md
+        modified:   .claude/skills/cost-optimization/SKILL.md
+        modified:   .claude/skills/developer/SKILL.md
+        modified:   .gitignore
+        modified:   .vscode/settings.json
+        modified:   docs/architecture.md
+        modified:   docs/features/agents.md
+        modified:   docs/features/skills.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .claude/agents/claude-code-agent.md
+        .claude/commands/scrape.md
+        .claude/skills/claude-code/
+        .cursor/projects/
+        .cursor/skills-cursor/
+        context/knowledge/docs/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+~/github/teaglebuilt/aiconfig  master +139 -133 [$!?]   colimais 󰏗 v0.0.1 on   (us-east-1) 
+ 17:50:01 ❯❯❯ git add .

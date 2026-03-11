@@ -1,0 +1,93 @@
+{
+  "name": "recent_activity",
+  "description": "Get recent activity for a project or across all projects.\n\n    Timeframe supports natural language formats like:\n    - \"2 days ago\"\n    - \"last week\"\n    - \"yesterday\"\n    - \"today\"\n    - \"3 weeks ago\"\n    Or standard formats like \"7d\"\n    ",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        ],
+        "default": ""
+      },
+      "depth": {
+        "default": 1,
+        "type": "integer"
+      },
+      "timeframe": {
+        "default": "7d",
+        "type": "string"
+      },
+      "page": {
+        "default": 1,
+        "type": "integer"
+      },
+      "page_size": {
+        "default": 10,
+        "type": "integer"
+      },
+      "project": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "workspace": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "output_format": {
+        "default": "text",
+        "enum": [
+          "text",
+          "json"
+        ],
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array"
+          }
+        ]
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "list_workspaces",
+  "description": "List available cloud workspaces (tenant_id, type, role, and name).",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "output_format": {
+        "default": "text",
+        "enum": [
+          "text",
+          "json"
+        ],
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

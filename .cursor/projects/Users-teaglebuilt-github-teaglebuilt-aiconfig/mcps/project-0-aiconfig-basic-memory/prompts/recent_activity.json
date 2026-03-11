@@ -1,0 +1,16 @@
+{
+  "name": "recent_activity",
+  "description": "Get recent activity from a specific project or across all projects",
+  "arguments": [
+    {
+      "name": "timeframe",
+      "description": "How far back to look for activity (e.g. '1d', '1 week')\n\nProvide as a JSON string matching the following schema: {\"description\":\"How far back to look for activity (e.g. '1d', '1 week')\",\"type\":\"string\"}",
+      "required": false
+    },
+    {
+      "name": "project",
+      "description": "Specific project to get activity from (None for discovery across all projects)\n\nProvide as a JSON string matching the following schema: {\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"description\":\"Specific project to get activity from (None for discovery across all projects)\"}",
+      "required": false
+    }
+  ]
+}

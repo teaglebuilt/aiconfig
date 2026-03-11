@@ -7,10 +7,12 @@ Agents are specialized personas with domain expertise and predefined tools.
 
 #### Available Agents
 
-| Agent | Description | Tools |
-|-------|-------------|-------|
-| `context-manager` | Information storage, retrieval, synchronization | Read, Write, redis, elasticsearch, vector-db |
-| `memory-manager` | Session logging, decision recording, context maintenance | Read, Write, Glob, Grep |
+| Agent | Description | Tools | Paired Skill |
+|-------|-------------|-------|-------------|
+| `architect-agent` | Architecture advisor, pattern evaluation, tradeoff analysis | Read, Edit, Write, Bash, Grep, WebSearch | `/architect` |
+| `developer-agent` | Implementation specialist, coding standards, test-driven development | Read, Edit, Write, Bash, Grep, Glob | `/developer` |
+| `claude-code-agent` | Claude Code architecture — hooks, observability, agent workflows | Read, Edit, Write, Bash, Grep, WebSearch | `/claude-code` |
+| `memory-manager` | Session logging, decision recording, context maintenance | Read, Write, Glob, Grep | — |
 
 #### Agent Discovery
 
@@ -27,8 +29,10 @@ Agents are discovered from these locations:
 
 ```
 .claude/agents/              # Claude Code agents
-├── context-manager.md
-└── memory-manager.md
+├── architect-agent.md       # Paired with /architect skill
+├── developer-agent.md       # Paired with /developer skill
+├── claude-code-agent.md     # Paired with /claude-code skill
+└── memory-manager.md        # Standalone agent
 
 .cursor/agents/              # Cursor agents
 ├── context-manager.md
@@ -62,21 +66,47 @@ Works with other agents and skills.
 
 | Aspect | Agent | Skill |
 |--------|-------|-------|
-| Scope | Broad domain expertise | Single focused task |
-| Persistence | Maintains context throughout session | Executes and completes |
-| Tools | Has access to specific toolset | Uses available tools |
-| Invocation | `@agent-name` or auto-triggered | `/skill-name` or triggers |
+| Role | Persona — *how to think* | Procedures — *what to do and read* |
+| Content | Reasoning principles, communication style, anti-patterns | Routing tables, procedures, references, templates |
+| Invocation | Cannot be invoked directly; attached via skill frontmatter | `/skill-name` by user or auto-triggered by Claude |
+| Size target | 60-90 lines (persona only) | Variable (procedures + routing tables) |
+
+#### Skill-Agent Pair Pattern
+
+The recommended pattern for complex tasks:
+
+```
+Skill (SKILL.md)                Agent (agent-name.md)
+├── Frontmatter (agent: name)   ├── Persona & principles
+├── Procedures                  ├── Reasoning approach
+├── Routing tables              ├── Communication style
+├── references/                 └── Anti-patterns to watch
+└── templates/
+```
+
+**Key rules:**
+- Skill references agent via `agent:` frontmatter — agent does NOT reference the skill
+- Routing tables live in the skill only (single source of truth)
+- Agents should not contain reference material, code examples, or pattern catalogs
 
 #### Key Agents
 
-**context-manager**
-- Manages information storage and retrieval
-- Handles synchronization across systems
-- Optimizes query performance
-- Ensures data consistency
+**architect-agent** (paired with `/architect`)
+- Senior software architect persona
+- Evaluates patterns without bias
+- Produces ADRs, tradeoff analyses, C4 diagrams
 
-**memory-manager**
+**developer-agent** (paired with `/developer`)
+- Implementation specialist persona
+- Follows established patterns, writes tests
+- Self-reviews against coding standards
+
+**claude-code-agent** (paired with `/claude-code`)
+- Claude Code architecture specialist
+- Hooks, observability, agent workflows
+- Configuration pattern evaluation
+
+**memory-manager** (standalone)
 - Maintains aiconfig project memory
 - Logs coding sessions
 - Records architectural decisions
-- Updates project context

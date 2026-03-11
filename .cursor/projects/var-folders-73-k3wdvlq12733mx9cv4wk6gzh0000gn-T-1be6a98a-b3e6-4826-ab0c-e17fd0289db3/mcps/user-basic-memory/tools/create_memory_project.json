@@ -1,0 +1,52 @@
+{
+  "name": "create_memory_project",
+  "description": "Create a new Basic Memory project.\n\nCreates a new project with the specified name and path. The project directory\nwill be created if it doesn't exist. Optionally sets the new project as default.\n\nArgs:\n    project_name: Name for the new project (must be unique)\n    project_path: File system path where the project will be stored\n    set_default: Whether to set this project as the default (optional, defaults to False)\n    output_format: \"text\" returns the existing human-readable result text.\n        \"json\" returns structured project creation metadata.\n    context: Optional FastMCP context for progress/status logging.\n\nReturns:\n    Confirmation message with project details\n\nExample:\n    create_memory_project(\"my-research\", \"~/Documents/research\")\n    create_memory_project(\"work-notes\", \"/home/user/work\", set_default=True)",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "project_name": {
+        "type": "string"
+      },
+      "project_path": {
+        "type": "string"
+      },
+      "set_default": {
+        "default": false,
+        "type": "boolean"
+      },
+      "output_format": {
+        "default": "text",
+        "enum": [
+          "text",
+          "json"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "project_name",
+      "project_path"
+    ],
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

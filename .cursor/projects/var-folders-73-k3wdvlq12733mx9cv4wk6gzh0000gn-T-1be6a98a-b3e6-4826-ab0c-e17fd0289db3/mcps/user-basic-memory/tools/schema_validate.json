@@ -1,0 +1,215 @@
+{
+  "name": "schema_validate",
+  "description": "Validate notes against their Picoschema definitions.",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "note_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "identifier": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "project": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "workspace": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "output_format": {
+        "default": "text",
+        "enum": [
+          "text",
+          "json"
+        ],
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "anyOf": [
+          {
+            "description": "Full validation report for one or more notes.",
+            "properties": {
+              "note_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              },
+              "total_notes": {
+                "default": 0,
+                "type": "integer"
+              },
+              "total_entities": {
+                "default": 0,
+                "type": "integer"
+              },
+              "valid_count": {
+                "default": 0,
+                "type": "integer"
+              },
+              "warning_count": {
+                "default": 0,
+                "type": "integer"
+              },
+              "error_count": {
+                "default": 0,
+                "type": "integer"
+              },
+              "results": {
+                "items": {
+                  "description": "Validation result for a single note against a schema.",
+                  "properties": {
+                    "note_identifier": {
+                      "type": "string"
+                    },
+                    "schema_entity": {
+                      "type": "string"
+                    },
+                    "passed": {
+                      "description": "True if no errors (warnings are OK)",
+                      "type": "boolean"
+                    },
+                    "field_results": {
+                      "items": {
+                        "description": "Result of validating a single schema field against a note.",
+                        "properties": {
+                          "field_name": {
+                            "type": "string"
+                          },
+                          "field_type": {
+                            "type": "string"
+                          },
+                          "required": {
+                            "type": "boolean"
+                          },
+                          "status": {
+                            "description": "One of: present, missing, type_mismatch",
+                            "type": "string"
+                          },
+                          "values": {
+                            "description": "Matched values from the note",
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "message": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "required": [
+                          "field_name",
+                          "field_type",
+                          "required",
+                          "status"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "unmatched_observations": {
+                      "additionalProperties": {
+                        "type": "integer"
+                      },
+                      "description": "Observation categories not covered by schema, with counts",
+                      "type": "object"
+                    },
+                    "unmatched_relations": {
+                      "description": "Relation types not covered by schema",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "warnings": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "errors": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "note_identifier",
+                    "schema_entity",
+                    "passed"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "additionalProperties": true,
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

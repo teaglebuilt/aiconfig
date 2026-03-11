@@ -1,0 +1,16 @@
+{
+  "name": "continue_conversation",
+  "description": "Continue a previous conversation",
+  "arguments": [
+    {
+      "name": "topic",
+      "description": "Topic or keyword to search for\n\nProvide as a JSON string matching the following schema: {\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"description\":\"Topic or keyword to search for\"}",
+      "required": false
+    },
+    {
+      "name": "timeframe",
+      "description": "How far back to look for activity (e.g. '1d', '1 week')\n\nProvide as a JSON string matching the following schema: {\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"description\":\"How far back to look for activity (e.g. '1d', '1 week')\"}",
+      "required": false
+    }
+  ]
+}

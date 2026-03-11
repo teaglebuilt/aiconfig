@@ -1,0 +1,5 @@
+{
+  "uri": "livekit://sdks",
+  "name": "livekit-sdks",
+  "description": "List of all LiveKit SDK repositories (client SDKs, server SDKs, and agent frameworks). Each repository includes its package names in the \"packages\" field, allowing you to cross-reference package.json dependencies (e.g., \"livekit-client\") with their corresponding repository IDs (e.g., \"livekit/client-sdk-js\") and changelogs. Use formatRepositoriesAsMarkdown() or getPackageToRepoMapping() functions for alternative views."
+}

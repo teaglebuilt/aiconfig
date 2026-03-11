@@ -1,0 +1,16 @@
+{
+  "name": "search_knowledge_base",
+  "description": "Search across all content in basic-memory",
+  "arguments": [
+    {
+      "name": "query",
+      "description": "",
+      "required": true
+    },
+    {
+      "name": "timeframe",
+      "description": "How far back to search (e.g. '1d', '1 week')\n\nProvide as a JSON string matching the following schema: {\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"description\":\"How far back to search (e.g. '1d', '1 week')\"}",
+      "required": false
+    }
+  ]
+}

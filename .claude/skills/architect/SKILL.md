@@ -18,7 +18,7 @@ This skill provides five core capabilities. Load the relevant resource before ex
 
 When asked to assess or understand an existing codebase's architecture:
 
-1. Read `resources/analysis-procedures.md` for the full analysis playbook
+1. Read `references/analysis-procedure.md` for the full analysis playbook
 2. Map the project structure, entry points, and dependency graph
 3. Identify the dominant patterns in use (layered, hexagonal, vertical slice, etc.)
 4. Measure coupling and cohesion indicators
@@ -52,8 +52,8 @@ cat go.mod
 
 When comparing patterns or making a structural decision:
 
-1. Read `resources/patterns.md` for the pattern decision matrices
-2. Read `resources/quality-attributes.md` for the scoring framework
+1. Read `references/patterns.md` for the pattern decision matrices
+2. Read `references/quality-attributes.md` for the scoring framework
 3. Identify the top 3-5 quality attributes that matter most for this project
 4. Score 2-3 candidate architectures against those attributes
 5. Produce a tradeoff analysis using `templates/tradeoff-matrix.md`
@@ -64,15 +64,15 @@ When a decision needs to be documented:
 
 1. Read `templates/adr-template.md`
 2. Read any documentation in `docs/` folder that applies to the input.
-2. Fill in all sections: context, decision drivers, considered options, decision outcome, consequences
-3. Save to the project's ADR directory (typically `docs/adr/` or `.docs/architecture/decisions/`)
-4. Name with sequential numbering: `NNNN-short-description.md`
+3. Fill in all sections: context, decision drivers, considered options, decision outcome, consequences
+4. Save to the project's ADR directory (typically `docs/adr/` or `.docs/architecture/decisions/`)
+5. Name with sequential numbering: `NNNN-short-description.md`
 
 ### 4. Generate Architecture Diagrams
 
 When visualizing architecture:
 
-1. Read `resources/diagram-guide.md` for C4, sequence, and deployment diagram patterns
+1. Read `references/diagram-guide.md` for C4, sequence, and deployment diagram patterns
 2. Use Mermaid syntax for all diagrams
 3. Start at the appropriate C4 level:
    - **Context** — System and its external actors/systems
@@ -85,9 +85,9 @@ When visualizing architecture:
 
 When designing from scratch or planning a migration:
 
-1. Read `resources/patterns.md` for pattern options
-2. Read `resources/quality-attributes.md` for prioritization
-3. Read `resources/analysis-procedures.md` section on migration strategies (if migrating)
+1. Read `references/patterns.md` for pattern options
+2. Read `references/quality-attributes.md` for prioritization
+3. Read `references/analysis-procedure.md` section on migration strategies (if migrating)
 4. Load any relevant **domain references** (see below)
 5. Follow this sequence:
    - Clarify requirements and constraints (ask if not provided)
@@ -107,10 +107,10 @@ When designing from scratch or planning a migration:
 
 | Task | Resource to Read |
 |------|-----------------|
-| Analyzing existing code | `resources/analysis-procedures.md` |
-| Comparing patterns | `resources/patterns.md` |
-| Scoring options | `resources/quality-attributes.md` |
-| Creating diagrams | `resources/diagram-guide.md` |
+| Analyzing existing code | `references/analysis-procedure.md` |
+| Comparing patterns | `references/patterns.md` |
+| Scoring options | `references/quality-attributes.md` |
+| Creating diagrams | `references/diagram-guide.md` |
 | Documenting decisions | `templates/adr-template.md` |
 | Comparing options side-by-side | `templates/tradeoff-matrix.md` |
 
@@ -124,9 +124,11 @@ Domain references provide technology-specific architectural knowledge. They live
 
 | File | When to Load |
 |------|-------------|
-| `kubernetes.md` | Core K8s architecture: cluster topology, namespace strategy, workload patterns, storage, networking |
 | `argocd.md` | GitOps deployment: repo strategy, environment promotion, Application/ApplicationSet patterns, sync policies |
-| `multicluster.md` | Multi-cluster management: fleet patterns, cross-cluster networking, state synchronization, failover |
+| `cost-optimization.md` | Kubernetes cost strategies: resource requests/limits optimization, cluster autoscaling, spot instances, FinOps |
+| `gitops.md` | GitOps patterns: repo strategies, reconciliation, drift detection, progressive delivery |
+| `multi-cluster.md` | Multi-cluster management: fleet patterns, cross-cluster networking, state synchronization, failover |
+| `networking.md` | Kubernetes networking: service mesh, ingress, network policies, DNS, load balancing |
 | `talos.md` | Talos Linux as K8s OS: immutable infrastructure, API-driven node management, security posture |
 
 #### `context/knowledge/architecture/frontend/` — Frontend Architecture
@@ -135,16 +137,31 @@ Domain references provide technology-specific architectural knowledge. They live
 |------|-------------|
 | `microfrontends.md` | MFE composition, routing, shared dependencies, inter-MFE communication, deployment |
 | `turborepo.md` | Monorepo architecture: package boundaries, dependency direction, caching, task pipelines |
-| `tanstack-start.md` | Anything tanstack start |
-| `vite.md` | Anything vite or vite.ts file present |
-| `react.md` | Anything react, jsx, tsx |
+| `tanstack-start.md` | TanStack Start framework, full-stack TypeScript, server functions |
+| `tanstack-router.md` | TanStack Router patterns, type-safe routing, file-based routes, search params |
+| `vite.md` | Vite build tool, plugin system, or vite.config.ts file present |
 
 #### `context/knowledge/architecture/ai/` — AI Systems Architecture
 
 | File | When to Load |
 |------|-------------|
 | `mcp.md` | Model Context Protocol: server topology, tool design, transport, agent-to-MCP composition |
-| `claude-code.md` | configuring, extending, automating, and enhancing claude code and claude code usage.  |
+| `claude-code.md` | Configuring, extending, automating, and enhancing Claude Code usage |
+| `cursor.md` | Cursor IDE configuration, rules, agents, MCP integration, AI coding patterns |
+
+#### `context/knowledge/docs/cloudflare/` — Cloudflare Platform
+
+| File | When to Load |
+|------|-------------|
+| `workers.md` | Cloudflare Workers, edge compute, V8 isolates, storage selection (KV/R2/D1/DO/Hyperdrive), bindings, pricing |
+| `networking.md` | Cloudflare CDN, DNS, Zero Trust (Access/Gateway/Tunnel/WARP), caching strategy, WAF, origin connectivity |
+
+#### `context/knowledge/architecture/api/` — API Architecture
+
+| File | When to Load |
+|------|-------------|
+| `nestjs.md` | NestJS architecture: modules, providers, guards, interceptors, microservices |
+| `patterns.md` | API design patterns: REST conventions, versioning, pagination, error handling, rate limiting |
 
 #### `context/knowledge/architecture/devops/` — Infrastructure & Tooling
 
@@ -163,7 +180,9 @@ Domain references provide technology-specific architectural knowledge. They live
 | File | When to Load |
 |------|-------------|
 | `kysely.md` | Query builder selection, data access layer architecture, type-safe SQL patterns, Kysely vs ORM decisions |
-| `prisma.md` | using prisma ORM, `schema.prisma` file exists, prisma client generation, prisma type safety, prisma client integration |
+| `prisma.md` | Prisma ORM, `schema.prisma` file exists, prisma client generation, type safety, client integration |
+| `frontegg.md` | Frontegg auth integration, tenant management, SSO, RBAC patterns |
+
 ---
 
 ## Domain Loading Rules

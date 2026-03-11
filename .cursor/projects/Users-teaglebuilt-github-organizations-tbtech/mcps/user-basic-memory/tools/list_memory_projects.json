@@ -1,0 +1,49 @@
+{
+  "name": "list_memory_projects",
+  "description": "List all available projects with their status.\n\nShows projects from both local and cloud sources when cloud credentials\nare available, merging by permalink to give a unified view.\n\nArgs:\n    output_format: \"text\" returns the existing human-readable project list.\n        \"json\" returns structured project metadata.\n    workspace: Cloud workspace name or tenant_id. Falls back to\n        config.default_workspace when not specified.\n    context: Optional FastMCP context for progress/status logging.",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "output_format": {
+        "default": "text",
+        "enum": [
+          "text",
+          "json"
+        ],
+        "type": "string"
+      },
+      "workspace": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "x-fastmcp-wrap-result": true
+  }
+}

@@ -14,6 +14,7 @@ Skills are reusable prompts that extend agent capabilities. They are the **prima
 | `/generate-prd` | Generate a Product Requirements Document for a feature | Writes files |
 | `/generate-prd-to-json` | Convert a PRD to Ralph autonomous agent JSON format | Writes files |
 | `/architect` | Deep architecture analysis, pattern evaluation, and decision documentation | Read-only |
+| `/claude-code` | Claude Code architecture — hooks, observability, agent workflows, configuration patterns | Read-only |
 
 ## Skill Discovery
 
@@ -37,11 +38,13 @@ Both clients discover `.claude/skills/` — **do not duplicate skills into `.cur
 ├── recall/SKILL.md             # Memory search
 ├── generate-prd/SKILL.md       # PRD generation
 ├── generate-prd-to-json/SKILL.md  # PRD to JSON conversion
-└── architect/                   # Architecture analysis
+├── architect/                   # Architecture analysis
+│   ├── SKILL.md                 # Entry point
+│   ├── references/              # Analysis frameworks
+│   └── templates/               # Output templates
+└── claude-code/                 # Claude Code architecture
     ├── SKILL.md                 # Entry point
-    ├── domains/                 # Domain-specific references
-    ├── resources/               # Analysis frameworks
-    └── templates/               # Output templates
+    └── references/              # Hooks, observability, orchestration
 ```
 
 Each skill is a directory with `SKILL.md` as the entry point. Additional files (templates, scripts, reference docs) can live alongside it — reference them from `SKILL.md` so Claude knows when to load them.

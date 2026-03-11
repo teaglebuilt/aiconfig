@@ -18,7 +18,7 @@ This skill provides four core capabilities. Load the relevant resources before e
 
 When building new functionality from a PRD or story:
 
-1. Read the PRD or story document fully
+1. Read the PRD or story document fully. Check in `docs/` or `docs/product/features/[feature]` and check for decisions in `docs/decisions` or `docs/product/features/[feature]/descisions`
 2. Load relevant coding standards (see Knowledge Routing below)
 3. Load relevant development knowledge for the tech stack involved
 4. Identify existing patterns in the codebase to follow

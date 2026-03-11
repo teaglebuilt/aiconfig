@@ -1,4 +1,24 @@
 {
+    "workbench.editor.showTabs": "multiple",
+    "workbench.statusBar.visible": false,
+    "window.commandCenter": false,
+    "editor.minimap.enabled": false,
+    "editor.guides.indentation": false,
+    "editor.renderLineHighlight": "none",
+    "editor.matchBrackets": "never",
+    "editor.lightbulb.enabled": "off",
+    "editor.showFoldingControls": "never",
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.horizontalScrollbarSize": 0,
+    "editor.scrollbar.verticalScrollbarSize": 0,
+    "explorer.confirmDelete": false,
+    "explorer.compactFolders": false,
+    "explorer.openEditors.visible": 1,
+    "explorer.openEditors.minVisible": 0,
+    "workbench.activityBar.location": "hidden",
+    "editor.guides.bracketPairs": false,
+    "editor.guides.bracketPairsHorizontal": false,
     "[markdown]": {
         "editor.formatOnSave": false,
         "editor.unicodeHighlight.ambiguousCharacters": false,
@@ -11,7 +31,6 @@
             "other": "off"
         }
     },
-    "markdown.extension.toc.updateOnSave": false,
     "files.exclude": {
         ".claude/projects": true,
         ".claude/todos": true,

@@ -306,6 +306,7 @@ Skills are defined in `SKILL.md` format and auto-discovered by both Claude Code 
 | `/recall` | Search past context | Read-only |
 | `/generate-prd` | Generate a PRD | Writes files |
 | `/architect` | Architecture analysis | Read-only |
+| `/claude-code` | Claude Code architecture — hooks, observability, agent workflows | Read-only |
 
 **Skill structure**:
 ```
@@ -314,11 +315,13 @@ Skills are defined in `SKILL.md` format and auto-discovered by both Claude Code 
 ├── log-session/SKILL.md
 ├── recall/SKILL.md
 ├── generate-prd/SKILL.md
-└── architect/
+├── architect/
+│   ├── SKILL.md
+│   ├── references/
+│   └── templates/
+└── claude-code/
     ├── SKILL.md
-    ├── domains/
-    ├── resources/
-    └── templates/
+    └── references/
 ```
 
 ### Commands (Legacy, Still Supported)
@@ -329,11 +332,12 @@ See [Commands vs Skills](./features/commands.md) for detailed guidance.
 
 ### Custom Agents
 
-| Agent | Purpose |
-|-------|---------|
-| `context-manager` | Information storage and retrieval |
-| `memory-manager` | Session and decision management |
-| `knowledge-synthesizer` | Pattern extraction and learning |
+| Agent | Purpose | Paired Skill |
+|-------|---------|-------------|
+| `architect-agent` | Architecture advisor, pattern evaluation | `/architect` |
+| `developer-agent` | Implementation specialist, coding standards | `/developer` |
+| `claude-code-agent` | Claude Code hooks, observability, agent workflows | `/claude-code` |
+| `memory-manager` | Session and decision management | — |
 
 ---
 

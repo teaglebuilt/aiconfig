@@ -149,12 +149,35 @@ Domain references provide technology-specific architectural knowledge. They live
 | `claude-code.md` | Configuring, extending, automating, and enhancing Claude Code usage |
 | `cursor.md` | Cursor IDE configuration, rules, agents, MCP integration, AI coding patterns |
 
+#### `context/knowledge/docs/cursor/` — Cursor
+
+| File | When to Load |
+|------|-------------|
+| `overview.md` | Cursor IDE configuration, Always use when related to claude code, cursor, or ai configuration |
+| `agent-prompting.md` | Cursor IDE configuration, agents, prompting |
+| `mcp.md` | Cursor, Model Context Protocol: server topology, tool design, transport, agent-to-MCP composition |
+| `rules.md` | Configuring, extending, automating, and enhancing Claude Code usage |
+| `plugins.md` | Cursor IDE configuration, extending cursor, plugins, MCP integration, AI coding patterns |
+| `subagents.md` | Cursor IDE configuration, agents, subagents, cursor, cursor agents, AI coding patterns |
+| `hooks.md` | Cursor IDE configuration, hooks, cursor hooks, AI coding patterns |
+| `skills.md` | Cursor IDE configuration, skills, cursor, claude code skills, AI coding patterns |
+
+#### `context/knowledge/docs/claude_code/` — Claude Code
+
+| File | When to Load |
+|------|-------------|
+| `best-practices.md` | Always use when related to claude code, cursor, or ai configuration |
+| `features-overview.md` | Always use when related to claude code, cursor, or ai configuration |
+| `sub-agents.md` | Claude Code, SubAgents, Agents |
+| `agent-teams.md` | Claude Code Agent Teams, Agent Orchestration |
+
 #### `context/knowledge/docs/cloudflare/` — Cloudflare Platform
 
 | File | When to Load |
 |------|-------------|
 | `workers.md` | Cloudflare Workers, edge compute, V8 isolates, storage selection (KV/R2/D1/DO/Hyperdrive), bindings, pricing |
 | `networking.md` | Cloudflare CDN, DNS, Zero Trust (Access/Gateway/Tunnel/WARP), caching strategy, WAF, origin connectivity |
+| `durable-objects.md` | stateful application workfloads |
 
 #### `context/knowledge/architecture/api/` — API Architecture
 

@@ -1,0 +1,127 @@
+---
+name: Vibe Check
+
+on:
+  schedule:
+    - cron: "15 4 1 * *"
+  workflow_dispatch:
+
+jobs:
+  check_claude_code:
+    runs-on: ubuntu-latest
+    outputs:
+      current: ${{ steps.fetch.outputs.version }}
+      known: ${{ steps.known.outputs.version }}
+      changed: ${{ steps.compare.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read known version
+        id: known
+        run: |
+          version=$(jq -r '.clients.claude_code.last_known_version // "none"' memory/global/vibe_check.json)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch latest release
+        id: fetch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(gh api repos/anthropics/claude-code/releases/latest --jq '.tag_name' 2>/dev/null || echo "unknown")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Compare versions
+        id: compare
+        run: |
+          if [ "${{ steps.fetch.outputs.version }}" != "${{ steps.known.outputs.version }}" ] && [ "${{ steps.fetch.outputs.version }}" != "unknown" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  check_cursor:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.compare.outputs.changed }}
+      current: ${{ steps.fetch.outputs.version }}
+      known: ${{ steps.known.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read known version
+        id: known
+        run: |
+          version=$(jq -r '.clients.cursor.last_known_version // "none"' memory/global/vibe_check.json)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch latest Cursor version
+        id: fetch
+        run: |
+          version=$(curl -sf https://www.cursor.com/api/dashboard/version 2>/dev/null \
+            | jq -r '.version // empty' 2>/dev/null || echo "unknown")
+          if [ "$version" = "unknown" ]; then
+            version=$(curl -sf "https://download.todesktop.com/230313mzl4w4u92/latest-mac.yml" 2>/dev/null \
+              | grep '^version:' | awk '{print $2}' || echo "unknown")
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Compare versions
+        id: compare
+        run: |
+          if [ "${{ steps.fetch.outputs.version }}" != "${{ steps.known.outputs.version }}" ] && [ "${{ steps.fetch.outputs.version }}" != "unknown" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  notify:
+    needs: [check_claude_code, check_cursor]
+    if: needs.check_claude_code.outputs.changed == 'true' || needs.check_cursor.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build report
+        id: report
+        run: |
+          {
+            echo "body<<REPORT_EOF"
+            echo "## Vibe Check — New Releases Detected"
+            echo ""
+            echo "Run \`/vibe_check\` locally to analyze changes and update aiconfig."
+            echo ""
+            echo "### Claude Code"
+            echo "- **Known**: \`${{ needs.check_claude_code.outputs.known }}\`"
+            echo "- **Latest**: \`${{ needs.check_claude_code.outputs.current }}\`"
+            if [ "${{ needs.check_claude_code.outputs.changed }}" = "true" ]; then
+              echo "- **Status**: UPDATE AVAILABLE"
+              echo "- [Release notes](https://github.com/anthropics/claude-code/releases)"
+            else
+              echo "- **Status**: Up to date"
+            fi
+            echo ""
+            echo "### Cursor"
+            echo "- **Known**: \`${{ needs.check_cursor.outputs.known }}\`"
+            echo "- **Latest**: \`${{ needs.check_cursor.outputs.current }}\`"
+            if [ "${{ needs.check_cursor.outputs.changed }}" = "true" ]; then
+              echo "- **Status**: UPDATE AVAILABLE"
+              echo "- [Changelog](https://www.cursor.com/changelog)"
+            else
+              echo "- **Status**: Up to date"
+            fi
+            echo ""
+            echo "### Next Steps"
+            echo "1. Run \`/vibe_check\` in Claude Code to do a full analysis"
+            echo "2. Review new features for aiconfig gaps"
+            echo "3. Update \`context/knowledge/docs/\` if needed"
+            echo "REPORT_EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: Create issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Vibe Check: New client releases detected ($(date +%Y-%m-%d))" \
+            --body "${{ env.body }}" \
+            --label "vibe-check"

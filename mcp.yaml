@@ -1,0 +1,24 @@
+servers:
+  basic-memory:
+    command: uvx
+    args:
+      - basic-memory
+      - mcp
+    description: Persistent memory with markdown notes and knowledge graph
+
+  lancedb:
+    command: uvx
+    args:
+      - lancedb-mcp
+    env:
+      LANCEDB_URI: ~/aiconfig/memory/vectors/lancedb
+      LANCEDB_TABLE: aiconfig_embeddings
+    description: Embedded vector database for semantic search
+
+  filesystem:
+    command: npx
+    args:
+      - -y
+      - "@anthropic/mcp-server-filesystem"
+      - ~/aiconfig
+    description: Read/write access to aiconfig memory files

@@ -1,0 +1,8 @@
+[project]
+name = "aiconfig"
+version = "0.1.0"
+description = "Centralized configuration and management for AI coding clients"
+requires-python = ">=3.11"
+
+[tool.uv.workspace]
+members = ["packages/*"]

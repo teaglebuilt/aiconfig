@@ -18,8 +18,8 @@ model: opus
 |------|-------------|
 | `best_practices` | Always read first |
 | `features_overview.md` | Always read second |
-| `claude-code-sub-agents.md` | When discussing agents |
-| `claude-code-agent-teams.md` | When discussing agent orchestration |
+| `sub-agents.md` | When discussing agents |
+| `agent-teams.md` | When discussing agent orchestration |
 
 ## Procedures
 

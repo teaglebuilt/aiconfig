@@ -11,7 +11,7 @@ This repository serves as a **portable AI configuration** ("aiconfig") that work
 ### Clients
 
 - **Claude Code** `.claude`
-- **Cursor** (via `.cursor/rules`)
+- **Cursor** (via `.cursor`)
 
 ## Shared Context System
 
@@ -31,3 +31,9 @@ All context is stored in the `context/` directory and organized by category:
 
 ### 🧠 Knowledge (`context/knowledge/`)
 - **AI Coding Best Practices** - How to work effectively with AI coding assistants
+
+## Packages
+
+Packages are managed with uv and monorepo settings
+
+* `packages/config` - All configuration management

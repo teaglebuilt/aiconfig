@@ -28,9 +28,9 @@ AIConfig is a portable, centralized configuration system that enables seamless c
 │  │  ┌─────────────────────┐    │    │      INTEGRATION            │   │
 │  │  │     memory/         │    │    │                             │   │
 │  │  │  global/            │    │    │  ┌─────────────────────┐    │   │
-│  │  │  projects/{name}/   │    │    │  │    mcp-config/      │    │   │
-│  │  │  vectors/lancedb/   │    │    │  │  claude-code.json   │    │   │
-│  │  └─────────────────────┘    │    │  │  cursor.json        │    │   │
+│  │  │  projects/{name}/   │    │    │  │  mcp.yaml (source)  │    │   │
+│  │  │  vectors/lancedb/   │    │    │  │  packages/config/   │    │   │
+│  │  └─────────────────────┘    │    │  │  (generates JSON)   │    │   │
 │  │  (dynamic, AI-updated)      │    │  └─────────────────────┘    │   │
 │  └─────────────────────────────┘    └─────────────────────────────┘   │
 │                                                                       │

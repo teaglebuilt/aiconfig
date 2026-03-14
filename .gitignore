@@ -5,3 +5,4 @@
 !.claude/skills/
 !.claude/commands/
 .envrc
+.venv

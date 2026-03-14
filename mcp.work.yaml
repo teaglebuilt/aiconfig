@@ -1,0 +1,7 @@
+servers:
+  vercel:
+    command: npx
+    args:
+      - -y
+      - "@vercel/mcp-server"
+    description: Vercel MCP server

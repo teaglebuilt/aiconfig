@@ -22,3 +22,10 @@ servers:
       - "@anthropic/mcp-server-filesystem"
       - ~/aiconfig
     description: Read/write access to aiconfig memory files
+  
+  cloudflare:
+    command: npx
+    args:
+      - mcp-remote
+      - https://docs.mcp.cloudflare.com/mcp
+    description: Cloudflare MCP server

@@ -101,74 +101,15 @@ else
     log_warn ".cursor directory not found in aiconfig, skipping"
 fi
 
-# --- Setup Claude Code MCP ---
-log_info "Setting up Claude Code MCP configuration..."
+# --- Setup MCP servers from canonical mcp.yaml ---
+log_info "Setting up MCP configuration for all clients..."
 
-CLAUDE_SETTINGS_DIR="$HOME/.config/claude-code"
-CLAUDE_SETTINGS_FILE="$CLAUDE_SETTINGS_DIR/settings.json"
-
-mkdir -p "$CLAUDE_SETTINGS_DIR"
-
-# Check if settings.json exists and merge MCP config
-if [ -f "$CLAUDE_SETTINGS_FILE" ]; then
-    log_info "Existing Claude Code settings found. Please manually merge MCP config from:"
-    log_info "  $AICONFIG_DIR/mcp-config/claude-code.json"
+if command -v uv &>/dev/null; then
+    (cd "$AICONFIG_DIR" && uv run aiconfig-mcp sync)
+    log_info "Synced MCP config from mcp.yaml to Claude Code and Cursor"
 else
-    # Create initial settings with MCP servers
-    cat > "$CLAUDE_SETTINGS_FILE" << 'EOF'
-{
-  "mcpServers": {
-    "basic-memory": {
-      "command": "uvx",
-      "args": ["basic-memory", "mcp"]
-    },
-    "lancedb": {
-      "command": "uvx",
-      "args": ["lancedb-mcp"],
-      "env": {
-        "LANCEDB_URI": "$HOME/aiconfig/memory/vectors/lancedb",
-        "LANCEDB_TABLE": "aiconfig_embeddings"
-      }
-    }
-  }
-}
-EOF
-    log_info "Created Claude Code settings with MCP servers"
-fi
-
-# --- Setup Cursor MCP ---
-log_info "Setting up Cursor MCP configuration..."
-
-CURSOR_MCP_FILE="$HOME/.cursor/mcp.json"
-
-if [ -f "$CURSOR_MCP_FILE" ]; then
-    log_info "Existing Cursor MCP config found. Please manually merge from:"
-    log_info "  $AICONFIG_DIR/mcp-config/cursor.json"
-else
-    # Create Cursor MCP config
-    cat > "$CURSOR_MCP_FILE" << 'EOF'
-{
-  "mcpServers": {
-    "basic-memory": {
-      "command": "uvx",
-      "args": ["basic-memory", "mcp"]
-    },
-    "lancedb": {
-      "command": "uvx",
-      "args": ["lancedb-mcp"],
-      "env": {
-        "LANCEDB_URI": "~/aiconfig/memory/vectors/lancedb",
-        "LANCEDB_TABLE": "aiconfig_embeddings"
-      }
-    },
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-filesystem", "~/aiconfig"]
-    }
-  }
-}
-EOF
-    log_info "Created Cursor MCP config at ~/.cursor/mcp.json"
+    log_warn "uv not found — skipping MCP config sync"
+    log_warn "Install uv (https://docs.astral.sh/uv/) then run: make sync-mcp"
 fi
 
 # --- Environment setup ---

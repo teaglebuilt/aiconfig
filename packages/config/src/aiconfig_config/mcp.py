@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +17,17 @@ def find_project_root() -> Path:
     raise FileNotFoundError("Could not find mcp.yaml in any parent directory")
 
 
+def _expand_env(value: Any) -> Any:
+    """Recursively expand ${VAR} references in strings using the environment."""
+    if isinstance(value, str):
+        return os.path.expandvars(value)
+    if isinstance(value, dict):
+        return {k: _expand_env(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_expand_env(v) for v in value]
+    return value
+
+
 class MCPConfig:
     """Loads mcp.yaml and generates client-specific MCP configurations."""
 
@@ -27,7 +39,8 @@ class MCPConfig:
 
     def _load(self) -> dict[str, Any]:
         with open(self.config_path) as f:
-            return yaml.safe_load(f)
+            raw = yaml.safe_load(f) or {}
+        return _expand_env(raw)
 
     @property
     def servers(self) -> dict[str, Any]:

@@ -2,11 +2,16 @@
   "mcpServers": {
     "basic-memory": {
       "command": "uvx",
-      "args": ["basic-memory", "mcp"]
+      "args": [
+        "basic-memory",
+        "mcp"
+      ]
     },
     "lancedb": {
       "command": "uvx",
-      "args": ["lancedb-mcp"],
+      "args": [
+        "lancedb-mcp"
+      ],
       "env": {
         "LANCEDB_URI": "~/aiconfig/memory/vectors/lancedb",
         "LANCEDB_TABLE": "aiconfig_embeddings"
@@ -14,7 +19,18 @@
     },
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-filesystem", "~/aiconfig"]
+      "args": [
+        "-y",
+        "@anthropic/mcp-server-filesystem",
+        "~/aiconfig"
+      ]
+    },
+    "cloudflare": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://docs.mcp.cloudflare.com/mcp"
+      ]
     }
   }
 }

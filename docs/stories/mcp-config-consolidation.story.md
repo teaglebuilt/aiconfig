@@ -24,8 +24,7 @@ All four define the same three MCP servers with the same commands and args. The 
 
 - As a developer, I want one place to add or remove MCP servers so that all clients pick up the change
 - As a developer, I want `make install` to set up MCP for all clients from a single source so that I don't maintain parallel configs
-- As a developer, I want to add a new MCP server once and have it available in both Claude Code and Cursor
-
+- As a developer, I want to add a new MCP server once and have it available in both Claude Code and Cursor by adding it to mcp.yaml. Use `packages/config` to manage this.
 ---
 
 ## Phase Tracking

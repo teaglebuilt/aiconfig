@@ -6,3 +6,5 @@
 !.claude/commands/
 .envrc
 .venv
+
+__pycache__/*
